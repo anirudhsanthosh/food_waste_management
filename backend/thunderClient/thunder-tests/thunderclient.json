@@ -1,0 +1,68 @@
+[
+  {
+    "_id": "f9f1a4af-7f2e-40ed-ba14-3a65e03a8a5c",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "",
+    "name": "root",
+    "url": "{{API}}/aa",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-02-25T15:01:23.711Z",
+    "modified": "2023-02-25T15:02:59.009Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "6ee957cd-87bb-4268-9e9a-50f010bb3da7",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "c0f96a8c-3cf6-4931-99d8-d3a426aaa98c",
+    "name": "signup",
+    "url": "/user/signup",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-02-25T17:30:40.999Z",
+    "modified": "2023-02-25T19:29:22.440Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\" : \"anirudh1@test.com\",\n  \"password\" : \"sdsdsdsad\",\n  \"name\" : \"dsdsdsads\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "d20d760a-603d-4051-a7ac-8db68bf765e6",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "c0f96a8c-3cf6-4931-99d8-d3a426aaa98c",
+    "name": "login",
+    "url": "/user/login",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-02-26T05:06:26.183Z",
+    "modified": "2023-02-26T05:14:47.036Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\" : \"anirudh1@test.com\",\n  \"password\" : \"sdsdsdsad\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "6c48bf74-c0ab-40df-970a-9fef4f417289",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "c0f96a8c-3cf6-4931-99d8-d3a426aaa98c",
+    "name": "get",
+    "url": "/user/",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2023-02-26T05:41:27.039Z",
+    "modified": "2023-02-26T05:41:51.750Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
