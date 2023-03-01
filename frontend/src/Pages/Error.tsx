@@ -6,10 +6,10 @@ export default function ErrorPage() {
     console.error(error);
 
     return (
-        <div id="error-page">
-            <h1>Oops!</h1>
-            <p>Sorry, an unexpected error has occurred.</p>
-            <p>
+        <div className="min-w-screen min-h-screen flex items-center justify-center flex-col">
+            <h1 className="text-4xl font-bold text-primary p-6" >😦 Oops.............! </h1>
+            <p className="text-xl ">Sorry, an unexpected error has occurred, please go back to previous page.</p>
+            <p className="text-slate-600 py-6">
                 <i>{error?.statusText || error?.message}</i>
             </p>
         </div>
