@@ -22,7 +22,8 @@ __export(Cors_exports, {
 });
 module.exports = __toCommonJS(Cors_exports);
 const CorsConfig = (request, callback) => {
-  let options = { origin: "http://localhost:5173", credentials: true };
+  const origin = request.headers.origin ?? "http://localhost:5173";
+  let options = { origin, credentials: true };
   callback(null, options);
 };
 // Annotate the CommonJS export names for ESM import in node:

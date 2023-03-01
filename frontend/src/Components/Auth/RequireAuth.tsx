@@ -1,7 +1,9 @@
+import { Outlet } from "react-router-dom";
+
 interface RequireAuth {
-    children: React.ReactElement;
+    // children: React.ReactElement;
 }
 
-export const RequireAuth: React.FC<RequireAuth> = ({ children }) => {
-    return children;
+export const RequireAuth: React.FC<RequireAuth> = ({}) => {
+    return <Outlet/>;
 };

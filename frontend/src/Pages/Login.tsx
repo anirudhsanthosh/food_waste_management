@@ -1,39 +1,41 @@
+import { useNavigate } from "react-router-dom";
 import { UserClient } from "../Api/user";
 
 export const Login: React.FC = () => {
+    const navigate = useNavigate();
 
-    const handleSubmit = async (event :  React.FormEvent<HTMLFormElement>)=>{
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const formData = new FormData(event.target as HTMLFormElement)
+        const formData = new FormData(event.target as HTMLFormElement);
 
-        const entries = {} as {[key:string ]: string}
+        const entries = {} as { [key: string]: string };
 
-        for(const entry of formData.entries()){
+        for (const entry of formData.entries()) {
+            const key = entry[0];
 
-            const key = entry[0]
-
-            entries[key] = entry[1] as string
+            entries[key] = entry[1] as string;
         }
 
-        const {email, password} = entries
-        
+        const { email, password } = entries;
 
-        await UserClient.auth({email, password});
+        try {
+            await UserClient.auth({ email, password });
 
+            // const user = await UserClient.get()
 
-        const user = await UserClient.get()
-
-        console.log(user)
-
-        
-    }
-
+            navigate('/')
+        } catch (error: any) {
+            console.error(error);
+        }
+    };
 
     return (
         <div className="min-w-screen min-h-screen flex items-center justify-center bg-primary/30">
             <div className="card w-96 bg-base-100 shadow-xl">
-            <figure><img src="/assets/loginFigure.jpg" alt="Shoes" /></figure>
+                <figure>
+                    <img src="/assets/loginFigure.jpg" alt="Shoes" />
+                </figure>
 
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -57,7 +59,12 @@ export const Login: React.FC = () => {
                             </div>
                         </div>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary" type="submit">Login</button>
+                        <button className="btn btn-outline btn-primary" type="button" onClick={()=>navigate('/register')}>
+                                Register
+                            </button>
+                            <button className="btn btn-primary" type="submit">
+                                Login
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -65,4 +72,3 @@ export const Login: React.FC = () => {
         </div>
     );
 };
-

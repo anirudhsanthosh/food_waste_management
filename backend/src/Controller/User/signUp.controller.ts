@@ -25,7 +25,6 @@ export async function signUp(request: Mutate<Request, { body: User.signUp }>, re
         return next(error)
     }
 
-    response.json({ email, name, password })
 }
 
 

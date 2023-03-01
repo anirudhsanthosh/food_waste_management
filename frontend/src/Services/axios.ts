@@ -16,10 +16,11 @@ export const onErrorResponseInterceptor = (error: any) => {
 
     if (error?.response?.data?.error?.name === "UnauthorizedError") return window.location.replace("/logout")
 
-    if (error?.response?.data?.error?.name === 'BadRequestError') {
-        toast.error(error.response.data.error.message)
+    if (error?.response?.data?.error?.code) {
 
-        throw error
+        if (error.response.data.error.message) toast.error(error.response.data.error.message)
+
+        throw error.response.data
     }
 
     return Promise.reject(error)

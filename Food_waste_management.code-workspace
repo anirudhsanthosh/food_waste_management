@@ -18,6 +18,7 @@
 			"daisyui",
 			"zustand"
 		],
-		"editor.fontLigatures": true
+		"editor.fontLigatures": true,
+		"headwind.prependCustomClasses": true
 	}
 }

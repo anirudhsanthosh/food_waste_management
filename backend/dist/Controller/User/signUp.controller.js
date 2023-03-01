@@ -48,7 +48,6 @@ async function signUp(request, response, next) {
   } catch (error) {
     return next(error);
   }
-  response.json({ email, name, password });
 }
 async function createNewUser(data) {
   const salt = await bcrypt.genSalt(10);
