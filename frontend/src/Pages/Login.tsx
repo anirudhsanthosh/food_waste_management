@@ -3,15 +3,14 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserClient } from "../Api/user";
 import { Configurations } from "../Config";
+import { useLogin } from "../Hooks/Data/useUserData";
 
 export const Login: React.FC = () => {
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    const {loginData,setLogin} = useLogin();
 
-        if(localStorage.getItem(Configurations.LOGIN_STATUS)) navigate('/',{replace : true});
-
-    },[])
+    if(loginData) navigate('/',{replace : true});
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -31,7 +30,7 @@ export const Login: React.FC = () => {
         try {
             const response = await UserClient.auth({ email, password });
 
-            localStorage.setItem(Configurations.LOGIN_STATUS, JSON.stringify(response));
+            setLogin(response);
 
             navigate("/",{replace: true});
         } catch (error: any) {

@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate, useNavigation } from "react-router-dom";
-import { UserClient } from "../../Api/user";
-import { Configurations } from "../../Config";
+import { UserClient } from "../Api/user";
+import { Configurations } from "../Config";
+import { useLogin } from "../Hooks/Data/useUserData";
 
 export const Logout: React.FC = () => {
     const navigate = useNavigate();
+
+    const {setLogout} = useLogin()
 
     useEffect(() => {
         logout();
@@ -15,7 +18,7 @@ export const Logout: React.FC = () => {
         try {
             await UserClient.logout();
 
-            localStorage.removeItem(Configurations.LOGIN_STATUS);
+            setLogout();
 
             navigate("/login",{replace:true});
         } catch (err) {

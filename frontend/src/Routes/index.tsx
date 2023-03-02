@@ -1,5 +1,5 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import { Logout } from "../Components/Auth/Logout";
+import { Logout } from "../Pages/Logout";
 import { RequireAuth } from "../Components/Auth/RequireAuth";
 import { AppLayout } from "../Components/Layout/AppLayout";
 import { Dashboard } from "../Pages/Dashboard";
