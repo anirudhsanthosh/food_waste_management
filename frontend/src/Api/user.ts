@@ -20,4 +20,11 @@ export class UserClient {
             name: string | null,
         }>('/user/signup', { email, password, name });
     }
+
+    static async logout(){
+        await axios.post('/user/logout');
+    }
 }
+
+// "email" : "anirudh1@test.com",
+//   "password" : "sdsdsdsad"

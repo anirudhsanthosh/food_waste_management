@@ -21,6 +21,7 @@ __export(login_controller_exports, {
   login: () => login
 });
 module.exports = __toCommonJS(login_controller_exports);
+var import_Config = require("../../Config");
 var import_Exceptions = require("../../Exceptions");
 var import_User = require("../../Repositories/User");
 var import_jwt = require("../../Services/jwt");
@@ -33,17 +34,7 @@ async function login(request, response, next) {
     const { name: name2, uuid } = existingUser;
     const authToken = import_jwt.Jwt.create({ email, name: name2, uuid });
     const loginResponse = { authToken };
-    const options = {
-      maxAge: 1e3 * 60 * 60 * 48,
-      // would expire after 2 days
-      httpOnly: true,
-      // The cookie only accessible by the web server
-      // signed: true, // Indicates if the cookie should be signed
-      path: "/",
-      secure: true,
-      sameSite: "none"
-    };
-    response.cookie("access_token", authToken, options);
+    response.cookie(import_Config.Config.authCookieName, authToken, import_Config.Config.authCookieOptions({ cookieForLogout: false, request }));
     return response.json(loginResponse);
   } catch (error) {
     return next(error);

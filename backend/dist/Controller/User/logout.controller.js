@@ -16,17 +16,17 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var get_controller_exports = {};
-__export(get_controller_exports, {
-  getUser: () => getUser
+var logout_controller_exports = {};
+__export(logout_controller_exports, {
+  logout: () => logout
 });
-module.exports = __toCommonJS(get_controller_exports);
-async function getUser(request, response, next) {
-  const authRequest = request;
-  const { email, name, uuid, role } = authRequest.user;
-  return response.json({ email, name, uuid, role });
+module.exports = __toCommonJS(logout_controller_exports);
+var import_Config = require("../../Config");
+async function logout(request, response, next) {
+  response.clearCookie(import_Config.Config.authCookieName);
+  response.send();
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  getUser
+  logout
 });

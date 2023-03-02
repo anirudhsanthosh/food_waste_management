@@ -1,7 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import { Logout } from "../Components/Auth/Logout";
 import { RequireAuth } from "../Components/Auth/RequireAuth";
 import { AppLayout } from "../Components/Layout/AppLayout";
+import { Dashboard } from "../Pages/Dashboard";
 import ErrorPage from "../Pages/Error";
 import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
@@ -27,16 +28,30 @@ export const router = createBrowserRouter([
                 element: <Logout />,
             },
             {
-                path: "/",
+                path: "",
                 element: <RequireAuth />,
                 children: [
                     {
-                        path: "me",
-                        element: <div>me</div>,
+                        path: "",
+                        element: <Dashboard/>,
                     },
                     {
-                        path: "/",
-                        element: <div>dashboard</div>,
+                        path: "sdsdsdsd",
+                        element: <div>dashboard
+                            <Outlet/>
+                        </div>,
+                        children:[
+
+                            {
+                                path: "dfdsfdf",
+                                element: <div>this is jjjj</div>,
+                            },
+
+                            {
+                                path: "wwwwww",
+                                element: <div>this toooooo</div>,
+                            },
+                        ]
                     },
                 ],
             },

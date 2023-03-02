@@ -36,6 +36,19 @@ import_dotenv.default.config();
 class Config {
   static clientUrl = process.env.CLIENT_URL || `http://localhost:3000`;
   static passwordSalt = process.env.PASSWORD_SALT || "afhsaifas323##$$%%^^";
+  static authCookieName = "access_token";
+  static authCookieOptions({ cookieForLogout, request }) {
+    return {
+      maxAge: cookieForLogout ? -1e4 : 1e3 * 60 * 60 * 48,
+      // would expire after 2 days
+      httpOnly: true,
+      // The cookie only accessible by the web server
+      // signed: true, // Indicates if the cookie should be signed
+      path: "/",
+      secure: request.headers.origin ? true : false,
+      sameSite: "none"
+    };
+  }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

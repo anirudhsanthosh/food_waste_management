@@ -11,7 +11,7 @@ export const App: React.FC = () => {
         <>
             <Toaster />
             <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />;
+                <RouterProvider router={router} />
                 <ReactQueryDevtools />
             </QueryClientProvider>
         </>

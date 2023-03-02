@@ -23,6 +23,7 @@ declare module User {
     }
 
     interface user extends signUpResponse {
+        role: 'user' | 'admin',
         password: string,
         id: number,
     }

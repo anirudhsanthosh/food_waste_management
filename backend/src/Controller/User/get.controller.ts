@@ -8,7 +8,7 @@ export async function getUser(request: Request ,response: Response, next: NextFu
 
     const authRequest = request as unknown as AuthRequest<Request>;
 
-    const {email,name,uuid} = authRequest.user;
+    const {email,name,uuid,role} = authRequest.user;
 
-    return response.json({email,name,uuid});
+    return response.json({email,name,uuid, role });
 }

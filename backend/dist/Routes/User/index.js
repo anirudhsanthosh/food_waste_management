@@ -24,6 +24,7 @@ module.exports = __toCommonJS(User_exports);
 var import_express = require("express");
 var import_get = require("../../Controller/User/get.controller");
 var import_login = require("../../Controller/User/login.controller");
+var import_logout = require("../../Controller/User/logout.controller");
 var import_signUp = require("../../Controller/User/signUp.controller");
 var import_jwtAuth = require("../../Middlewares/jwtAuth");
 var import_validateRequestPayload = require("../../Middlewares/validateRequestPayload");
@@ -33,6 +34,7 @@ const UserRouter = (0, import_express.Router)();
 UserRouter.get("/", import_jwtAuth.authenticateWithJwt, import_get.getUser);
 UserRouter.post("/signup", (0, import_validateRequestPayload.validateRequestPayload)(import_SignUp.signUpSchema), import_signUp.signUp);
 UserRouter.post("/login", (0, import_validateRequestPayload.validateRequestPayload)(import_Login.loginSchema), import_login.login);
+UserRouter.post("/logout", import_logout.logout);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   UserRouter

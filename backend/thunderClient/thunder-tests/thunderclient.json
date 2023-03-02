@@ -22,12 +22,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-02-25T17:30:40.999Z",
-    "modified": "2023-02-25T19:29:22.440Z",
+    "modified": "2023-03-02T02:41:16.194Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\" : \"anirudh1@test.com\",\n  \"password\" : \"sdsdsdsad\",\n  \"name\" : \"dsdsdsads\"\n}",
+      "raw": "{\n  \"email\" : \"admin@test.com\",\n  \"password\" : \"password\",\n  \"name\" : \"Admin\"\n}",
       "form": []
     },
     "tests": []
@@ -61,6 +61,20 @@
     "sortNum": 40000,
     "created": "2023-02-26T05:41:27.039Z",
     "modified": "2023-02-26T05:41:51.750Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "35169490-2b04-4289-b581-42732a1f3bb4",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "c0f96a8c-3cf6-4931-99d8-d3a426aaa98c",
+    "name": "logout",
+    "url": "/user/logout",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2023-03-02T15:59:30.446Z",
+    "modified": "2023-03-02T16:01:15.765Z",
     "headers": [],
     "params": [],
     "tests": []

@@ -1,8 +1,17 @@
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserClient } from "../Api/user";
+import { Configurations } from "../Config";
 
 export const Login: React.FC = () => {
     const navigate = useNavigate();
+
+    useEffect(()=>{
+
+        if(localStorage.getItem(Configurations.LOGIN_STATUS)) navigate('/',{replace : true});
+
+    },[])
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -20,12 +29,13 @@ export const Login: React.FC = () => {
         const { email, password } = entries;
 
         try {
-            await UserClient.auth({ email, password });
+            const response = await UserClient.auth({ email, password });
 
-            // const user = await UserClient.get()
+            localStorage.setItem(Configurations.LOGIN_STATUS, JSON.stringify(response));
 
-            navigate('/')
+            navigate("/",{replace: true});
         } catch (error: any) {
+            toast.error("Failed to login please try again!");
             console.error(error);
         }
     };
@@ -55,11 +65,16 @@ export const Login: React.FC = () => {
                                     name="password"
                                     placeholder="Password"
                                     className="input input-bordered input-primary w-full max-w-xs"
+                                    current-password={true}
                                 />
                             </div>
                         </div>
                         <div className="card-actions justify-end">
-                        <button className="btn btn-outline btn-primary" type="button" onClick={()=>navigate('/register')}>
+                            <button
+                                className="btn btn-outline btn-primary"
+                                type="button"
+                                onClick={() => navigate("/register")}
+                            >
                                 Register
                             </button>
                             <button className="btn btn-primary" type="submit">
