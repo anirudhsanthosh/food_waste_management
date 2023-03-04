@@ -6,6 +6,9 @@ import { Dashboard } from "../Pages/Dashboard";
 import ErrorPage from "../Pages/Error";
 import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
+import { CreatePickup } from "../Pages/newPickup";
+import { RequireToBeAdmin } from "../Components/Auth/admin";
+import { AdminDashboard } from "../Pages/AdminDashboard";
 
 export const router = createBrowserRouter([
     {
@@ -36,15 +39,17 @@ export const router = createBrowserRouter([
                         element: <Dashboard/>,
                     },
                     {
-                        path: "sdsdsdsd",
-                        element: <div>dashboard
-                            <Outlet/>
-                        </div>,
+                        path: "new",
+                        element: <CreatePickup />,
+                    },
+                    {
+                        path: "admin",
+                        element: <RequireToBeAdmin/>,
                         children:[
 
                             {
-                                path: "dfdsfdf",
-                                element: <div>this is jjjj</div>,
+                                path: "",
+                                element: <AdminDashboard/>,
                             },
 
                             {
@@ -53,8 +58,10 @@ export const router = createBrowserRouter([
                             },
                         ]
                     },
+                    
                 ],
             },
+            
         ],
     },
 ]);

@@ -18,6 +18,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var DB_exports = {};
 __export(DB_exports, {
+  PickupRequestRepository: () => PickupRequestRepository,
   UsersRepository: () => UsersRepository,
   db: () => db
 });
@@ -25,8 +26,10 @@ module.exports = __toCommonJS(DB_exports);
 var import_client = require("@prisma/client");
 const db = new import_client.PrismaClient({});
 const UsersRepository = db.user;
+const PickupRequestRepository = db.pickupRequest;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  PickupRequestRepository,
   UsersRepository,
   db
 });

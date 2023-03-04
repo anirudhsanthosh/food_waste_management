@@ -6,6 +6,8 @@ import * as dotenv from "dotenv";
 import { UserRouter } from "./Routes/User";
 import { CorsConfig } from "./Config/Cors";
 import { ExceptionHandler, PayloadErrorHandler } from "./Middlewares/handleErrors";
+import { PickupRequestRouter } from "./Routes/PickupRequest";
+import { AdminRouter } from "./Routes/Admin";
 dotenv.config();
 
 export const App = express();
@@ -28,6 +30,10 @@ function initServer() {
         App.get("/", (req, res) => res.send(`Hey there it's lonely here..... 😔`))
 
         App.use('/user',UserRouter);
+
+        App.use('/request',PickupRequestRouter);
+
+        App.use('/admin',AdminRouter);
 
         App.use(ExceptionHandler)
 

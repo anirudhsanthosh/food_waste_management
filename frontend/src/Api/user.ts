@@ -8,7 +8,12 @@ export class UserClient {
     }
 
     static async get() {
-        const response = await axios.get<{}>('/user/');
+        const response = await axios.get<{
+            email: string
+            name: string
+            uuid: string
+            role: 'user' | 'admin'
+        }>('/user/');
 
         return response.data;
     }
@@ -21,7 +26,7 @@ export class UserClient {
         }>('/user/signup', { email, password, name });
     }
 
-    static async logout(){
+    static async logout() {
         await axios.post('/user/logout');
     }
 }

@@ -39,6 +39,8 @@ var dotenv = __toESM(require("dotenv"));
 var import_User = require("./Routes/User");
 var import_Cors = require("./Config/Cors");
 var import_handleErrors = require("./Middlewares/handleErrors");
+var import_PickupRequest = require("./Routes/PickupRequest");
+var import_Admin = require("./Routes/Admin");
 dotenv.config();
 const App = (0, import_express.default)();
 initServer();
@@ -51,6 +53,8 @@ function initServer() {
     App.use(import_handleErrors.PayloadErrorHandler);
     App.get("/", (req, res) => res.send(`Hey there it's lonely here..... \u{1F614}`));
     App.use("/user", import_User.UserRouter);
+    App.use("/request", import_PickupRequest.PickupRequestRouter);
+    App.use("/admin", import_Admin.AdminRouter);
     App.use(import_handleErrors.ExceptionHandler);
     const PORT = process.env.PORT || 5e3;
     App.listen(PORT, () => console.log(`\u{1F680} server running on @${PORT}`));
