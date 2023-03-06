@@ -3,6 +3,7 @@ import { Bar, Doughnut } from "react-chartjs-2";
 import { toast } from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
 import { useAdminElection } from "../Hooks/Data/useAdminElection";
+import { useUserData } from "../Hooks/Data/useUserData";
 
 export const ElectionView: React.FC = () => {
     const { electionId } = useParams();
@@ -10,6 +11,8 @@ export const ElectionView: React.FC = () => {
     if (!electionId) return <div>Sorry something went wrong please go back</div>;
 
     const { isLoading, data, isError, error, update } = useAdminElection(electionId);
+
+    const { user } = useUserData();
 
     const { isLoading: isUpdating } = update;
 
@@ -96,9 +99,22 @@ export const ElectionView: React.FC = () => {
         <div className="w-full">
             <h1 className="w-full  p-4 text-2xl font-bold flex justify-between">
                 Statistics
-                <Link to={`/admin/election?electionId=${data.id}`}>
-                    <button className="btn btn-ghost">Edit</button>
-                </Link>
+                <div>
+                    {/* @ts-ignore */}
+                    <Link className="btn btn-ghost" to={-1}>
+                        back
+                    </Link>
+                    {user?.role === "admin" && (
+                        <>
+                            <Link to={`/admin/election?electionId=${data.id}`}>
+                                <button className="btn btn-ghost">Edit</button>
+                            </Link>
+                            <Link to={`/election/${data.id}/vote`}>
+                                <button className="btn btn-ghost">Cast Vote</button>
+                            </Link>
+                        </>
+                    )}
+                </div>
             </h1>
             <div className="w-full flex items-stretch justify-around gap-2 py-6 px-16">
                 <div className="w-full flex max-w-[20vw]">
@@ -110,8 +126,8 @@ export const ElectionView: React.FC = () => {
             </div>
 
             <div>
-                <div className="w-full">
-                    <div className="stats">
+                <div className="w-full flex justify-center">
+                    <div className="stats flex w-2/3 items-center justify-center">
                         <div className="stat">
                             <div className="stat-figure text-secondary">
                                 <svg
@@ -188,20 +204,22 @@ export const ElectionView: React.FC = () => {
                     <h2 className="text-lg font-bold">Description</h2>
                     <p>{data.description}</p>
                 </div>
-                <div className="py-4">
-                    <h2 className="text-lg font-bold">Status</h2>
-                    <p className="py-2">
-                        <select
-                            className="select select-primary w-full max-w-xs"
-                            onChange={(e) => handleStatusChange(e.target.value)}
-                            disabled={isUpdating}
-                        >
-                            {statusOptions.map((status) => (
-                                <option selected={data.status === status}>{status}</option>
-                            ))}
-                        </select>
-                    </p>
-                </div>
+                {user?.role === "admin" && (
+                    <div className="py-4">
+                        <h2 className="text-lg font-bold">Status</h2>
+                        <p className="py-2">
+                            <select
+                                className="select select-primary w-full max-w-xs"
+                                onChange={(e) => handleStatusChange(e.target.value)}
+                                disabled={isUpdating}
+                            >
+                                {statusOptions.map((status) => (
+                                    <option selected={data.status === status}>{status}</option>
+                                ))}
+                            </select>
+                        </p>
+                    </div>
+                )}
                 <div className="pt-4 pb-16">
                     <h2 className="text-lg font-bold">Options</h2>
                     <ul>

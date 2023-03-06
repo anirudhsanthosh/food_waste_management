@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { UserClient } from "../Api/user";
 import { Configurations } from "../Config";
@@ -8,9 +9,11 @@ import { useLogin } from "../Hooks/Data/useUserData";
 export const Login: React.FC = () => {
     const navigate = useNavigate();
 
-    const {loginData,setLogin} = useLogin();
+    const { loginData, setLogin } = useLogin();
 
-    if(loginData) navigate('/',{replace : true});
+    const queryClient = useQueryClient();
+
+    if (loginData) navigate("/", { replace: true });
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -32,7 +35,9 @@ export const Login: React.FC = () => {
 
             setLogin(response);
 
-            navigate("/",{replace: true});
+            queryClient.invalidateQueries("user");
+
+            navigate("/", { replace: true });
         } catch (error: any) {
             toast.error("Failed to login please try again!");
             console.error(error);
@@ -42,7 +47,7 @@ export const Login: React.FC = () => {
     return (
         <div className="min-w-screen min-h-screen flex items-center justify-center gap-5">
             <div>
-            <figure>
+                <figure>
                     <img className="max-h-[80vh]" src="/assets/undraw_projections_re_ulc6.svg" alt="Shoes" />
                 </figure>
             </div>

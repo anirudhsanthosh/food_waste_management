@@ -31,13 +31,13 @@ export const NavBar: React.FC = () => {
                         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         
-                        {user?.role === "admin" && (
+                        {/* {user?.role === "admin" && (
                             <li>
                                 <a className="text-primary" onClick={() => navigate("/admin")}>
                                     Elections
                                 </a>
                             </li>
-                        )}
+                        )} */}
                         <li>
                             <a onClick={() => navigate("/logout")} className="text-primary">
                                 Logout
@@ -51,13 +51,13 @@ export const NavBar: React.FC = () => {
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    {user?.role === "admin" && (
+                    {/* {user?.role === "admin" && (
                         <li>
                             <a className="text-primary" onClick={() => navigate("/admin")}>
                             Elections
                             </a>
                         </li>
-                    )}
+                    )} */}
                     <li>
                         <a onClick={() => navigate("/logout")} className="text-primary">
                             Logout

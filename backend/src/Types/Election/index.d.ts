@@ -7,6 +7,11 @@ declare module Election {
 
     }
 
+    interface createVote {
+        electionId : number,
+        optionId: number
+    }
+
 
     interface createElectionOptionPayload {
 

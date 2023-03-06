@@ -16,6 +16,8 @@ export async function deleteOption(request: Request, response: Response, next: N
                 id: Number(optionId)
             }
         })
+
+        response.json({status : 'success'})
     } catch (err) {
         next(err);
 

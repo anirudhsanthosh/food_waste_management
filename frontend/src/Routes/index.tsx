@@ -11,6 +11,7 @@ import { RequireToBeAdmin } from "../Components/Auth/admin";
 import { AdminDashboard } from "../Pages/AdminDashboard";
 import { Election } from "../Pages/Election";
 import { ElectionView } from "../Pages/viewElection";
+import { Vote } from "../Pages/vote";
 
 export const router = createBrowserRouter([
     {
@@ -38,11 +39,19 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <Dashboard/>,
+                        element: <AdminDashboard/>,
                     },
                     {
                         path: "new",
                         element: <CreatePickup />,
+                    },
+                    {
+                        path: "election/:electionId",
+                        element: <ElectionView/>,
+                    },
+                    {
+                        path: "/election/:electionId/vote",
+                        element: <Vote/>,
                     },
                     {
                         path: "admin",

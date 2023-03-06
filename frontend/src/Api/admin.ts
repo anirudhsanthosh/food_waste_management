@@ -23,6 +23,11 @@ export class AdminClient {
         return response.data
     }
 
+    static async getVote(electionId: string){
+        const response =  await axios.get<null | {}>(`/admin/elections/${electionId}/vote`);
+        return response.data
+    }
+
 
     static async update(payload: API.updateElectionPayload) {
 
@@ -30,6 +35,15 @@ export class AdminClient {
         const response = await axios.put<API.pickup>(`/admin/elections/${electionId}`, { title, description, options, status })
 
         return response.data
+    }
+
+    static async deleteOption(optionId:number){
+
+        return await axios.delete(`/admin/elections/options/${optionId}`);
+    }
+
+    static async addVote(params:API.createVoteParams){
+        return await axios.post(`/admin/elections/vote`, params);
     }
 
     static async cancel(requestId: number) {

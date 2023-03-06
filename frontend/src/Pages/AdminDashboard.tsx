@@ -1,24 +1,14 @@
-import moment from "moment";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Card } from "../Components/common/Card/card";
 import { SpinnerWithText } from "../Components/common/Loader/SpinnerWithText";
 import { useAdmin } from "../Hooks/Data/useAdmin";
+import { useUserData } from "../Hooks/Data/useUserData";
 
 export const AdminDashboard: React.FC = () => {
-    const { elections, isError, isLoading, error, updateStatus } = useAdmin();
+    const { elections, isError, isLoading, error } = useAdmin();
 
-    const handleChange = async (pickupId: number, status: string) => {
-        console.log({ pickupId, status });
-
-        try {
-            await updateStatus.mutateAsync({ pickupId, status });
-
-            toast.success("Pickup status has been updated successfully");
-        } catch (err) {
-            toast.error("Sorry failed to update pickup status");
-        }
-    };
+    const { user } = useUserData();
 
     if (isLoading)
         return (
@@ -51,10 +41,26 @@ export const AdminDashboard: React.FC = () => {
 
     return (
         <div className="flex flex-col w-full h-full pb-16 justify-center overflow-auto">
+            <div>
+                <h1 className="tex-lg font-bold px-6">
+                    Hi {user?.name ?? user?.email}{" "}
+                    {user?.role === "admin" && <span className="text-xs text-slate-400 px-3">admin</span>}
+                </h1>
+                {}
+            </div>
             {elections.map((election) => {
                 return (
                     <div className="w-full p-4 ">
-                        <Link to={`/admin/election/${election.id}`} state={election}>
+                        <Link
+                            to={
+                                user?.role === "admin"
+                                    ? `/admin/election/${election.id}`
+                                    : election.status !== "active"
+                                    ? `/election/${election.id}`
+                                    : `/election/${election.id}/vote`
+                            }
+                            state={election}
+                        >
                             <div className="cursor-pointer w-full shadow-md rounded-lg flex items-center gap-3 justify-between  border border-slate-200 p-4 transition-all delay-75 hover:scale-[1.005]">
                                 <div className="w-full">
                                     <h3 className="text-lg font-bold capitalize">{election.title}</h3>

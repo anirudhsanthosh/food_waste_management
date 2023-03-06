@@ -16,27 +16,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var deleteOption_exports = {};
-__export(deleteOption_exports, {
-  deleteOption: () => deleteOption
+var registerVote_exports = {};
+__export(registerVote_exports, {
+  registerVote: () => registerVote
 });
-module.exports = __toCommonJS(deleteOption_exports);
+module.exports = __toCommonJS(registerVote_exports);
 var import_DB = require("../../DB");
-async function deleteOption(request, response, next) {
+async function registerVote(request, response, next) {
+  const newRequest = request;
+  const { user } = newRequest;
+  const { electionId, optionId } = newRequest.body;
   try {
-    const newRequest = request;
-    const { optionId } = newRequest.params;
-    await import_DB.ElectionOptionRepository.delete({
-      where: {
-        id: Number(optionId)
-      }
+    const newVote = await import_DB.VoteRepository.create({
+      data: { user_id: user.id, electionId, optionId }
     });
-    response.json({ status: "success" });
+    return response.send(newVote);
   } catch (err) {
     next(err);
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  deleteOption
+  registerVote
 });

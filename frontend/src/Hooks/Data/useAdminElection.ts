@@ -11,5 +11,24 @@ export const useAdminElection = (electionId: string) => {
         onSuccess: () => queryClient.invalidateQueries([ 'admin/elections', electionId ]),
 
     })
-    return { ...election, update }
+
+    const addVote = useMutation((value: API.createVoteParams) => AdminClient.addVote(value), {
+
+        onSuccess: () => {
+            queryClient.invalidateQueries([ 'admin/elections', electionId ])
+
+            queryClient.invalidateQueries([ 'admin/elections', electionId ])
+        },
+
+    })
+
+    const getVote = useQuery([ 'admin/elections/vote', electionId ], () => AdminClient.getVote(electionId));
+
+    const deleteOption = useMutation((optionId: number) => AdminClient.deleteOption(optionId), {
+
+        onSuccess: () => queryClient.invalidateQueries([ 'admin/elections', electionId ]),
+
+    })
+
+    return { ...election, update, deleteOption, addVote, getVote }
 }

@@ -81,8 +81,8 @@ model Vote {
   user_id    Int
   votedIn    Election       @relation(fields: [electionId], references: [id])
   electionId Int
-  voteFor    PollingOptions @relation(fields: [optionId], references: [id])
-  optionId   Int
+  voteFor    PollingOptions? @relation(fields: [optionId], references: [id])
+  optionId   Int?
   
   @@unique([user_id, electionId])
 }

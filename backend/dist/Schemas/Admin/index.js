@@ -30,6 +30,7 @@ var Admin_exports = {};
 __export(Admin_exports, {
   createElectionOptionsSchema: () => createElectionOptionsSchema,
   createElectionSchema: () => createElectionSchema,
+  createVoteSchema: () => createVoteSchema,
   updateElectionOptionsSchema: () => updateElectionOptionsSchema,
   updateElectionSchema: () => updateElectionSchema,
   updateFoodRequestSchema: () => updateFoodRequestSchema
@@ -59,10 +60,15 @@ const updateElectionSchema = import_joi.default.object({
   options: import_joi.default.array().items(updateElectionOptionsSchema).required(),
   status: import_joi.default.string().required().valid("pending", "active", "completed", "canceled")
 });
+const createVoteSchema = import_joi.default.object({
+  electionId: import_joi.default.number().min(1).required(),
+  optionId: import_joi.default.number().min(1).required()
+});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   createElectionOptionsSchema,
   createElectionSchema,
+  createVoteSchema,
   updateElectionOptionsSchema,
   updateElectionSchema,
   updateFoodRequestSchema

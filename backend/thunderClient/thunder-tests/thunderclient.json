@@ -229,5 +229,52 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "d16e4b48-ae09-447c-8f9e-09a8b6a58498",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
+    "name": "delete option",
+    "url": "/admin/elections/options/16",
+    "method": "DELETE",
+    "sortNum": 140000,
+    "created": "2023-03-06T07:51:42.911Z",
+    "modified": "2023-03-06T07:58:05.485Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "77a33d18-bb6b-407d-8a70-943c43db2831",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
+    "name": "register vote",
+    "url": "/admin/elections/vote",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2023-03-06T09:12:27.855Z",
+    "modified": "2023-03-06T09:14:33.483Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"electionId\" : 1,\n  \"optionId\" : 1\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "d202e69e-ea37-4ab4-b20a-526f60e763dc",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
+    "name": "get user vote",
+    "url": "/admin/elections/6/vote",
+    "method": "GET",
+    "sortNum": 160000,
+    "created": "2023-03-06T10:24:04.162Z",
+    "modified": "2023-03-06T10:25:22.021Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

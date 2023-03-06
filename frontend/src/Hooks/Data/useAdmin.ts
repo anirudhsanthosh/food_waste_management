@@ -14,17 +14,17 @@ export function useAdmin() {
 
   })
 
-  const updateStatus = useMutation((value: API.adminPickupUpdateParams) => AdminClient.update(value), {
+  // const updateStatus = useMutation((value: API.adminPickupUpdateParams) => AdminClient.update(value), {
 
-    onSuccess: () => queryClient.invalidateQueries('admin'),
+  //   onSuccess: () => queryClient.invalidateQueries('admin'),
 
-  })
+  // })
   const deleteMutation = useMutation((pickupId: number) => PickupClient.cancel(pickupId), {
 
     onSuccess: () => queryClient.invalidateQueries('pickups'),
 
   })
 
-  return { elections: elections.data, ...elections, updateStatus, deleteMutation, addMutation };
+  return { elections: elections.data, ...elections, deleteMutation, addMutation };
 }
 

@@ -16,27 +16,31 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var deleteOption_exports = {};
-__export(deleteOption_exports, {
-  deleteOption: () => deleteOption
+var getUserVote_exports = {};
+__export(getUserVote_exports, {
+  getVote: () => getVote
 });
-module.exports = __toCommonJS(deleteOption_exports);
+module.exports = __toCommonJS(getUserVote_exports);
 var import_DB = require("../../DB");
-async function deleteOption(request, response, next) {
+var import_Exceptions = require("../../Exceptions");
+async function getVote(request, response, next) {
   try {
+    const { electionId } = request.params;
     const newRequest = request;
-    const { optionId } = newRequest.params;
-    await import_DB.ElectionOptionRepository.delete({
+    const { user } = newRequest;
+    if (!electionId)
+      throw import_Exceptions.Exceptions.invalidRequest("election id must be provided");
+    const vote = await import_DB.VoteRepository.findFirst({
       where: {
-        id: Number(optionId)
+        user_id: user.id,
+        electionId: Number(electionId)
       }
     });
-    response.json({ status: "success" });
+    response.json(vote);
   } catch (err) {
-    next(err);
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  deleteOption
+  getVote
 });

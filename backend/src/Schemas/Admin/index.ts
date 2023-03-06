@@ -25,6 +25,11 @@ export const updateElectionSchema = Joi.object({
     title: Joi.string().min(5).required(),
     description: Joi.string().min(5).required(),
     options: Joi.array().items(updateElectionOptionsSchema).required(),
-    status : Joi.string().required().valid('pending','active','completed','canceled')
+    status: Joi.string().required().valid('pending', 'active', 'completed', 'canceled')
 
+})
+
+export const createVoteSchema = Joi.object({
+    electionId: Joi.number().min(1).required(),
+    optionId: Joi.number().min(1).required(),
 })

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAdmin } from "../Hooks/Data/useAdmin";
 import { useAdminElection } from "../Hooks/Data/useAdminElection";
 
@@ -17,7 +17,7 @@ export const Election: React.FC = () => {
 
     const electionId = searchParams.get("electionId") ?? "";
 
-    const { data, update } = useAdminElection(electionId);
+    const { data, update, deleteOption } = useAdminElection(electionId);
 
     const navigate = useNavigate();
 
@@ -30,11 +30,10 @@ export const Election: React.FC = () => {
     const [options, setOptions] = useState<option[]>([]);
 
     useEffect(() => {
+        setDescription(data?.description ?? "");
 
-        setDescription(data?.description ?? '');
+        setTitle(data?.title ?? "");
 
-        setTitle(data?.title ?? '');
-        
         const loadedOptions =
             data?.options.map((option) => {
                 const { description, id, title } = option;
@@ -43,7 +42,7 @@ export const Election: React.FC = () => {
             }) ?? [];
 
         setOptions(loadedOptions);
-    }, [electionId]);
+    }, [electionId, data]);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -91,8 +90,7 @@ export const Election: React.FC = () => {
             if (!option.description) return toast.error(`option number ${index + 1}'s description can't be empty`);
         });
 
-        
-        if(electionId) return updateElection()
+        if (electionId) return updateElection();
 
         try {
             const payload = {
@@ -112,27 +110,27 @@ export const Election: React.FC = () => {
         }
     };
 
-    const updateElection = async ()=>{
-
-        if(!data) return;
+    const updateElection = async () => {
+        if (!data) return;
 
         try {
             const payload = {
                 title,
                 description,
                 electionId,
-                status : data?.status,
+                status: data?.status,
                 options: options.map((item) => {
-                    if(item.id.toString().indexOf("newItem__") > -1 ) return { title: item.title, description: item.description }
+                    if (item.id.toString().indexOf("newItem__") > -1)
+                        return { title: item.title, description: item.description };
 
-                    return item
+                    return item;
                 }),
             };
 
-            console.log(payload)
+            console.log(payload);
 
             //@ts-ignore
-            await update.mutateAsync(payload)
+            await update.mutateAsync(payload);
 
             toast.success(`${title} has been created!`);
             //@ts-ignore
@@ -141,10 +139,22 @@ export const Election: React.FC = () => {
             console.log(err);
             toast.error(err?.error?.message ?? "Failed to create new election please try again");
         }
+    };
 
-    }
+    const handleDeleteOption = async (option: option) => {
+        if (option.id.toString().indexOf("newItem__") === -1 && electionId) {
+            const request = deleteOption.mutateAsync(Number(option.id));
 
-    const handleDeleteOption = (option: option) => {
+            toast.promise(request, {
+                loading: "Deleting option...",
+                success: <b>Option deleted!</b>,
+                error: <b>Could not delete option.</b>,
+            });
+
+            await request;
+
+            return;
+        }
         const newOptions = options.filter((item) => item.id !== option.id);
 
         setOptions(newOptions);
@@ -153,7 +163,13 @@ export const Election: React.FC = () => {
     return (
         <div className="p-4 flex w-full">
             <div className="w-full">
-                <h2 className="text-xl font-bold text-secondary pb-4 text-center">Create Election</h2>
+                <div className="w-full items-center flex pb-4">
+                    {/* @ts-ignore */}
+                    <Link className="btn btn-ghost" to={-1}>
+                        back
+                    </Link>
+                    <h2 className=" w-full text-xl font-bold text-secondary text-center ">Create Election</h2>
+                </div>
 
                 <div className="w-full">
                     <div className="form-control w-full ">
@@ -186,7 +202,7 @@ export const Election: React.FC = () => {
                             className={`btn btn-primary ${isLoading ? "loading" : ""}`}
                             onClick={handleCreateElection}
                         >
-                            {electionId ? 'Update' :'Create'} Election
+                            {electionId ? "Update" : "Create"} Election
                         </button>
                     </div>
                     <div className="flex gap-3 py-3">

@@ -35,7 +35,10 @@ declare module API {
     }
     
 
-
+    interface createVoteParams {
+        electionId : number,
+        optionId : number
+    }
 
 
     interface pickup {
