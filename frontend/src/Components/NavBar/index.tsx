@@ -30,13 +30,11 @@ export const NavBar: React.FC = () => {
                         tabIndex={0}
                         className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                     >
-                        <li>
-                            <a className="text-primary">Hi {user?.name ?? user?.email}</a>
-                        </li>
+                        
                         {user?.role === "admin" && (
                             <li>
                                 <a className="text-primary" onClick={() => navigate("/admin")}>
-                                    Admin Panel
+                                    Elections
                                 </a>
                             </li>
                         )}
@@ -51,13 +49,12 @@ export const NavBar: React.FC = () => {
                     {import.meta.env.VITE_SITE_NAME}
                 </a>
             </div>
-            <div className="navbar-end hidden lg:flex">Hi {user?.name ?? user?.email}</div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {user?.role === "admin" && (
                         <li>
                             <a className="text-primary" onClick={() => navigate("/admin")}>
-                                Admin Panel
+                            Elections
                             </a>
                         </li>
                     )}
@@ -67,17 +64,8 @@ export const NavBar: React.FC = () => {
                         </a>
                     </li>
                 </ul>
-                {/* </div>
-            <div className="navbar-end"> */}
-                <a onClick={() => navigate("/new")} className="btn btn-primary">
-                    New Pickup
-                </a>
             </div>
-            <div className="navbar-end  lg:hidden">
-                <a onClick={() => navigate("/new")} className="btn btn-primary  ">
-                    New Pickup
-                </a>
-            </div>
+       
         </div>
     );
 };

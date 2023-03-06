@@ -40,12 +40,13 @@ export const Login: React.FC = () => {
     };
 
     return (
-        <div className="min-w-screen min-h-screen flex items-center justify-center bg-primary/30">
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <figure>
-                    <img src="/assets/loginFigure.jpg" alt="Shoes" />
+        <div className="min-w-screen min-h-screen flex items-center justify-center gap-5">
+            <div>
+            <figure>
+                    <img className="max-h-[80vh]" src="/assets/undraw_projections_re_ulc6.svg" alt="Shoes" />
                 </figure>
-
+            </div>
+            <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
                         <h2 className="card-title text-center">Login</h2>
@@ -70,7 +71,7 @@ export const Login: React.FC = () => {
                         </div>
                         <div className="card-actions justify-end">
                             <button
-                                className="btn btn-outline btn-primary"
+                                className="btn btn-ghost text-primary"
                                 type="button"
                                 onClick={() => navigate("/register")}
                             >

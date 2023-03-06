@@ -12,6 +12,9 @@ axios.interceptors.response.use(
     (error) => onErrorResponseInterceptor(error)
 );
 
+document.getElementsByTagName("html")[0].setAttribute("data-theme", import.meta.env.VITE_SITE_THEME);
+
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <App />

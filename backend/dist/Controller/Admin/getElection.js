@@ -16,15 +16,19 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var getPickups_exports = {};
-__export(getPickups_exports, {
-  getElections: () => getElections
+var getElection_exports = {};
+__export(getElection_exports, {
+  getElection: () => getElection
 });
-module.exports = __toCommonJS(getPickups_exports);
+module.exports = __toCommonJS(getElection_exports);
 var import_DB = require("../../DB");
-async function getElections(request, response, next) {
+var import_Exceptions = require("../../Exceptions");
+async function getElection(request, response, next) {
   try {
-    const elections = await import_DB.ElectionRepository.findMany({
+    const { electionId } = request.params;
+    await isPickupRequestIdValid(electionId);
+    const election = await import_DB.ElectionRepository.findFirst({
+      where: { id: Number(electionId) },
       select: {
         id: true,
         createdAt: true,
@@ -50,12 +54,20 @@ async function getElections(request, response, next) {
         }
       }
     });
-    response.json(elections);
+    return response.json(election);
   } catch (err) {
     next(err);
   }
 }
+async function isPickupRequestIdValid(pickupId) {
+  if (!pickupId)
+    throw import_Exceptions.Exceptions.invalidRequest("Pickup request Id must be number");
+  if (!Number(pickupId))
+    throw import_Exceptions.Exceptions.invalidRequest("Pickup request Id must be number");
+  const pickup = await import_DB.ElectionRepository.findFirst({ where: { id: Number(pickupId) } });
+  return pickup;
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  getElections
+  getElection
 });

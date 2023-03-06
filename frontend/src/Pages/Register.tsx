@@ -35,7 +35,6 @@ export const Register: React.FC = () => {
             const user = await UserClient.register({ email, password, name });
             setRegisteredSuccessfully(true);
 
-            // navigate('')
         } catch (error: any) {
             console.error(error);
         }
@@ -43,12 +42,14 @@ export const Register: React.FC = () => {
     };
 
     return (
-        <div className="min-w-screen min-h-screen flex items-center justify-center bg-primary/30">
-            <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="min-w-screen min-h-screen flex items-center justify-center gap-6">
+            <div>
                 <figure>
-                    <img src="/assets/loginFigure.jpg" alt="Shoes" />
+                    <img className="max-h-[80vh]" src="/assets/undraw_projections_re_ulc6.svg" alt="Shoes" />
                 </figure>
+            </div>
 
+            <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
                         <h2 className="card-title text-center">Register</h2>
@@ -59,6 +60,7 @@ export const Register: React.FC = () => {
                             <div className="py-3">
                                 <div className="py-1">
                                     <input
+                                        required
                                         type="text"
                                         name="name"
                                         placeholder="Name"
@@ -67,6 +69,7 @@ export const Register: React.FC = () => {
                                 </div>
                                 <div className="py-1">
                                     <input
+                                        required
                                         type="email"
                                         name="email"
                                         placeholder="Email Address"
@@ -75,6 +78,7 @@ export const Register: React.FC = () => {
                                 </div>
                                 <div className="py-1">
                                     <input
+                                        required
                                         type="password"
                                         name="password"
                                         placeholder="Password"
@@ -83,6 +87,7 @@ export const Register: React.FC = () => {
                                 </div>
                                 <div className="py-1">
                                     <input
+                                        required
                                         type="password"
                                         name="confirmPassword"
                                         placeholder="Confirm Password"

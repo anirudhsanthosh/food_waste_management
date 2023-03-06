@@ -28,6 +28,10 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var Admin_exports = {};
 __export(Admin_exports, {
+  createElectionOptionsSchema: () => createElectionOptionsSchema,
+  createElectionSchema: () => createElectionSchema,
+  updateElectionOptionsSchema: () => updateElectionOptionsSchema,
+  updateElectionSchema: () => updateElectionSchema,
   updateFoodRequestSchema: () => updateFoodRequestSchema
 });
 module.exports = __toCommonJS(Admin_exports);
@@ -35,7 +39,31 @@ var import_joi = __toESM(require("joi"));
 const updateFoodRequestSchema = import_joi.default.object({
   status: import_joi.default.string().required().valid("completed", "pending", "failed", "rejected", "cancelled")
 });
+const createElectionOptionsSchema = import_joi.default.object({
+  title: import_joi.default.string().min(1).required(),
+  description: import_joi.default.string().min(5).required()
+});
+const updateElectionOptionsSchema = import_joi.default.object({
+  title: import_joi.default.string().min(1).required(),
+  description: import_joi.default.string().min(5).required(),
+  id: import_joi.default.number()
+});
+const createElectionSchema = import_joi.default.object({
+  title: import_joi.default.string().min(5).required(),
+  description: import_joi.default.string().min(5).required(),
+  options: import_joi.default.array().items(createElectionOptionsSchema).required()
+});
+const updateElectionSchema = import_joi.default.object({
+  title: import_joi.default.string().min(5).required(),
+  description: import_joi.default.string().min(5).required(),
+  options: import_joi.default.array().items(updateElectionOptionsSchema).required(),
+  status: import_joi.default.string().required().valid("pending", "active", "completed", "canceled")
+});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  createElectionOptionsSchema,
+  createElectionSchema,
+  updateElectionOptionsSchema,
+  updateElectionSchema,
   updateFoodRequestSchema
 });

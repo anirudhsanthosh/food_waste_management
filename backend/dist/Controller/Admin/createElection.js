@@ -16,46 +16,31 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var getPickups_exports = {};
-__export(getPickups_exports, {
-  getElections: () => getElections
+var createElection_exports = {};
+__export(createElection_exports, {
+  createElection: () => createElection
 });
-module.exports = __toCommonJS(getPickups_exports);
+module.exports = __toCommonJS(createElection_exports);
 var import_DB = require("../../DB");
-async function getElections(request, response, next) {
-  try {
-    const elections = await import_DB.ElectionRepository.findMany({
-      select: {
-        id: true,
-        createdAt: true,
-        description: true,
-        status: true,
-        title: true,
-        options: {
-          select: {
-            id: true,
-            description: true,
-            title: true,
-            _count: {
-              select: {
-                vote: true
-              }
-            }
-          }
-        },
-        _count: {
-          select: {
-            vote: true
-          }
-        }
-      }
-    });
-    response.json(elections);
-  } catch (err) {
-    next(err);
-  }
+async function createElection(request, response, next) {
+  const newRequest = request;
+  const { user } = newRequest;
+  const { description, options, title } = newRequest.body;
+  const newElection = await import_DB.ElectionRepository.create({
+    data: { title, description, status: "active", user_id: user.id }
+  });
+  const newOptions = options.map(async (option) => {
+    const data = {
+      title: option.title,
+      description: option.description,
+      pollId: newElection.id
+    };
+    return await import_DB.ElectionOptionRepository.create({ data });
+  });
+  await Promise.allSettled(newOptions);
+  return response.send(newElection);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  getElections
+  createElection
 });

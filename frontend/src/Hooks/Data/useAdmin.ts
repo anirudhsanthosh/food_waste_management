@@ -5,7 +5,14 @@ import { PickupClient } from "../../Api/pickups";
 export function useAdmin() {
   const queryClient = useQueryClient()
 
-  const pickups = useQuery('admin', AdminClient.getAllPickups);
+  const elections = useQuery('admin/elections', AdminClient.getAllElections);
+  
+
+  const addMutation = useMutation((value: API.createElectionPayload) => AdminClient.create(value), {
+
+    onSuccess: () => queryClient.invalidateQueries('admin/elections'),
+
+  })
 
   const updateStatus = useMutation((value: API.adminPickupUpdateParams) => AdminClient.update(value), {
 
@@ -18,6 +25,6 @@ export function useAdmin() {
 
   })
 
-  return { pickups: pickups.data, ...pickups, updateStatus, deleteMutation };
+  return { elections: elections.data, ...elections, updateStatus, deleteMutation, addMutation };
 }
 

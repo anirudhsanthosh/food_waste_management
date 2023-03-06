@@ -1,5 +1,43 @@
 declare module API {
 
+    interface Election {
+        id: number
+        createdAt: string
+        description: string
+        status: string
+        title: string
+        options: Option[]
+        _count: count
+    }
+
+    interface Option {
+        id: number
+        description: string
+        title: string
+        _count: Count
+    }
+
+    interface Count {
+        vote: number
+    }
+
+    interface createElectionPayload {
+        title: string
+        description: string
+        options: { title: string, description: string }[]
+    }
+
+
+    interface updateElectionPayload extends createElectionPayload {
+        electionId: string
+        status : string
+        options: { title: string, description: string, id : number }[]
+    }
+    
+
+
+
+
     interface pickup {
         id: number
         address: string
@@ -16,8 +54,8 @@ declare module API {
     }
 
     interface adminPickupUpdateParams {
-        pickupId : number,
-        status : string,
+        pickupId: number,
+        status: string,
     }
 }
 

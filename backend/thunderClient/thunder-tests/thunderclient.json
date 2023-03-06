@@ -149,12 +149,12 @@
     "_id": "8c5a1425-e321-43af-b348-f30c80900ec0",
     "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
     "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
-    "name": "getAll pickups",
-    "url": "/admin/pickups",
+    "name": "getAll elections",
+    "url": "/admin/elections",
     "method": "GET",
     "sortNum": 100000,
     "created": "2023-03-03T02:29:44.356Z",
-    "modified": "2023-03-03T02:40:34.164Z",
+    "modified": "2023-03-05T15:56:11.549Z",
     "headers": [],
     "params": [
       {
@@ -182,19 +182,52 @@
     "_id": "450f4399-3a3b-45f9-be99-48f1f3310f4b",
     "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
     "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
-    "name": "update pickup status",
-    "url": "/admin/pickups/10",
-    "method": "PATCH",
+    "name": "update election status",
+    "url": "/admin/elections/3",
+    "method": "PUT",
     "sortNum": 110000,
     "created": "2023-03-03T03:05:28.032Z",
-    "modified": "2023-03-03T03:29:16.176Z",
+    "modified": "2023-03-05T15:41:37.574Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"status\" : \"completed\"\n}",
+      "raw": "{\n  \"title\" : \"Do you like biriyani\",\n  \"description\" : \"we will provide biriyani here after.....!\",\n  \"status\" : \"pending\",\n  \"options\" : [\n    {\n      \"title\" : \"yses\",\n      \"description\" : \"dsdsfdsfsdfdsfsdf\",\n      \"id\" : 3\n      \n    },\n    {\n      \"id\" : 4,\n      \"title\" : \"Nso\",\n      \"description\" : \"dsdsfdsfsdfdsfsdf\"\n      \n    },\n    {\n      \"title\" : \"No\",\n      \"description\" : \"okkkkkkkkk\"\n      \n    }\n    ]\n}",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "111def50-e33e-4207-b3d5-dc135ff47610",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
+    "name": "create new election",
+    "url": "/admin/elections",
+    "method": "POST",
+    "sortNum": 120000,
+    "created": "2023-03-05T14:40:17.613Z",
+    "modified": "2023-03-05T15:01:00.121Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"title\" : \"Do you like biriyani\",\n  \"description\" : \"we will provide biriyani here after.....!\",\n  \"options\" : [\n    {\n      \"title\" : \"yes\",\n      \"description\" : \"dsdsfdsfsdfdsfsdf\"\n      \n    },\n    {\n      \"title\" : \"No\",\n      \"description\" : \"dsdsfdsfsdfdsfsdf\"\n      \n    }\n    ]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "ac91e880-ce7f-4d2b-9e56-1755a4c8f3e0",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "ea531616-9069-49cd-aed4-76a1607a0318",
+    "name": "get election",
+    "url": "/admin/elections/4",
+    "method": "GET",
+    "sortNum": 130000,
+    "created": "2023-03-06T04:41:46.541Z",
+    "modified": "2023-03-06T04:42:59.804Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]

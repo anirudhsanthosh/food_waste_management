@@ -16,46 +16,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var getPickups_exports = {};
-__export(getPickups_exports, {
-  getElections: () => getElections
+var deleteOption_exports = {};
+__export(deleteOption_exports, {
+  deleteOption: () => deleteOption
 });
-module.exports = __toCommonJS(getPickups_exports);
+module.exports = __toCommonJS(deleteOption_exports);
 var import_DB = require("../../DB");
-async function getElections(request, response, next) {
+async function deleteOption(request, response, next) {
   try {
-    const elections = await import_DB.ElectionRepository.findMany({
-      select: {
-        id: true,
-        createdAt: true,
-        description: true,
-        status: true,
-        title: true,
-        options: {
-          select: {
-            id: true,
-            description: true,
-            title: true,
-            _count: {
-              select: {
-                vote: true
-              }
-            }
-          }
-        },
-        _count: {
-          select: {
-            vote: true
-          }
-        }
+    const newRequest = request;
+    const { optionId } = newRequest.params;
+    await import_DB.ElectionOptionRepository.delete({
+      where: {
+        id: Number(optionId)
       }
     });
-    response.json(elections);
   } catch (err) {
     next(err);
   }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  getElections
+  deleteOption
 });

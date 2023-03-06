@@ -9,6 +9,8 @@ import { Register } from "../Pages/Register";
 import { CreatePickup } from "../Pages/newPickup";
 import { RequireToBeAdmin } from "../Components/Auth/admin";
 import { AdminDashboard } from "../Pages/AdminDashboard";
+import { Election } from "../Pages/Election";
+import { ElectionView } from "../Pages/viewElection";
 
 export const router = createBrowserRouter([
     {
@@ -53,8 +55,12 @@ export const router = createBrowserRouter([
                             },
 
                             {
-                                path: "wwwwww",
-                                element: <div>this toooooo</div>,
+                                path: "election",
+                                element: <Election/>,
+                            },
+                            {
+                                path: "election/:electionId",
+                                element: <ElectionView/>,
                             },
                         ]
                     },

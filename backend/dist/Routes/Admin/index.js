@@ -22,15 +22,19 @@ __export(Admin_exports, {
 });
 module.exports = __toCommonJS(Admin_exports);
 var import_express = require("express");
-var import_getPickups = require("../../Controller/Admin/getPickups");
-var import_updatePickup = require("../../Controller/Admin/updatePickup");
+var import_createElection = require("../../Controller/Admin/createElection");
+var import_getElection = require("../../Controller/Admin/getElection");
+var import_getElections = require("../../Controller/Admin/getElections");
+var import_updateElection = require("../../Controller/Admin/updateElection");
 var import_adminAuth = require("../../Middlewares/adminAuth");
 var import_jwtAuth = require("../../Middlewares/jwtAuth");
 var import_validateRequestPayload = require("../../Middlewares/validateRequestPayload");
 var import_Admin = require("../../Schemas/Admin");
 const AdminRouter = (0, import_express.Router)();
-AdminRouter.get("/pickups", import_jwtAuth.authenticateWithJwt, import_adminAuth.authenticateAdmin, import_getPickups.getPickupRequests);
-AdminRouter.patch("/pickups/:pickupId", import_jwtAuth.authenticateWithJwt, import_adminAuth.authenticateAdmin, (0, import_validateRequestPayload.validateRequestPayload)(import_Admin.updateFoodRequestSchema), import_updatePickup.updatePickupRequest);
+AdminRouter.get("/elections", import_jwtAuth.authenticateWithJwt, import_adminAuth.authenticateAdmin, import_getElections.getElections);
+AdminRouter.post("/elections", import_jwtAuth.authenticateWithJwt, import_adminAuth.authenticateAdmin, (0, import_validateRequestPayload.validateRequestPayload)(import_Admin.createElectionSchema), import_createElection.createElection);
+AdminRouter.put("/elections/:electionId", import_jwtAuth.authenticateWithJwt, import_adminAuth.authenticateAdmin, (0, import_validateRequestPayload.validateRequestPayload)(import_Admin.updateElectionSchema), import_updateElection.updateElection);
+AdminRouter.get("/elections/:electionId", import_jwtAuth.authenticateWithJwt, import_adminAuth.authenticateAdmin, import_getElection.getElection);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AdminRouter

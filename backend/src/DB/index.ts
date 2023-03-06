@@ -9,6 +9,13 @@ export const UsersRepository = db.user;
 
 export const PickupRequestRepository = db.pickupRequest;
 
+export const ElectionRepository = db.election;
+
+export const ElectionOptionRepository = db.pollingOptions;
+
+export const VoteRepository = db.vote;
+
+
 
 
 

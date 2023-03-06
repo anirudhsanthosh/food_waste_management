@@ -16,11 +16,11 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var getPickups_exports = {};
-__export(getPickups_exports, {
+var getElections_exports = {};
+__export(getElections_exports, {
   getElections: () => getElections
 });
-module.exports = __toCommonJS(getPickups_exports);
+module.exports = __toCommonJS(getElections_exports);
 var import_DB = require("../../DB");
 async function getElections(request, response, next) {
   try {
