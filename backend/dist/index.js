@@ -31,16 +31,16 @@ __export(src_exports, {
   App: () => App
 });
 module.exports = __toCommonJS(src_exports);
-var import_express = __toESM(require("express"));
 var import_body_parser = __toESM(require("body-parser"));
 var import_cookie_parser = __toESM(require("cookie-parser"));
 var import_cors = __toESM(require("cors"));
 var dotenv = __toESM(require("dotenv"));
-var import_User = require("./Routes/User");
+var import_express = __toESM(require("express"));
 var import_Cors = require("./Config/Cors");
 var import_handleErrors = require("./Middlewares/handleErrors");
-var import_PickupRequest = require("./Routes/PickupRequest");
 var import_Admin = require("./Routes/Admin");
+var import_Loan = require("./Routes/Loan");
+var import_User = require("./Routes/User");
 dotenv.config();
 const App = (0, import_express.default)();
 initServer();
@@ -53,7 +53,7 @@ function initServer() {
     App.use(import_handleErrors.PayloadErrorHandler);
     App.get("/", (req, res) => res.send(`Hey there it's lonely here..... \u{1F614}`));
     App.use("/user", import_User.UserRouter);
-    App.use("/request", import_PickupRequest.PickupRequestRouter);
+    App.use("/loan", import_Loan.LoanRouter);
     App.use("/admin", import_Admin.AdminRouter);
     App.use(import_handleErrors.ExceptionHandler);
     const PORT = process.env.PORT || 5e3;

@@ -276,5 +276,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "b1b37ac1-fbe8-42d7-9d80-f16ce42c55fc",
+    "colId": "125a2b92-a4ee-47ae-9a11-baace00b9258",
+    "containerId": "925ac43c-b0a2-436b-96f9-ff8121f6b565",
+    "name": "create loan",
+    "url": "/loan/",
+    "method": "POST",
+    "sortNum": 170000,
+    "created": "2023-03-06T15:16:22.443Z",
+    "modified": "2023-03-06T15:32:09.862Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"amount\": 1000,\n  \"duration\": 30,\n  \"interestRate\": 14,\n  \"installments\": 12,\n  \"attachments\": [\n    {\n      \"file\": \"dfdffasfsf\",\n      \"title\": \"fsafsfsaf\"\n    }\n  ]\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

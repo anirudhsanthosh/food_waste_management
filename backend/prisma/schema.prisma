@@ -21,6 +21,36 @@ model Post {
   authorId  Int
 }
 
+model Bank {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Loan {
+  id        Int    @id @default(autoincrement())
+  status    String @default("pending")
+  belongsTo User   @relation(fields: [user_id], references: [id])
+  user_id   Int
+
+  amount          Int
+  duration        Int
+  interestRate    Float
+  installments    Int
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  startedAt       DateTime          @default(now())
+  LoanAttachments LoanAttachments[]
+}
+
+model LoanAttachments {
+  id        Int      @id @default(autoincrement())
+  file      String
+  title     String
+  createdAt DateTime @default(now())
+  belongsTo Loan     @relation(fields: [loan_id], references: [id])
+  loan_id   Int
+}
+
 model Profile {
   id     Int     @id @default(autoincrement())
   bio    String?
@@ -40,6 +70,7 @@ model User {
   pickupRequests PickupRequest[]
   poll           Election[]
   vote           Vote[]
+  Loan           Loan[]
 }
 
 model PickupRequest {
@@ -76,13 +107,13 @@ model PollingOptions {
 }
 
 model Vote {
-  id         Int            @id @default(autoincrement())
-  votedBy    User           @relation(fields: [user_id], references: [id])
+  id         Int             @id @default(autoincrement())
+  votedBy    User            @relation(fields: [user_id], references: [id])
   user_id    Int
-  votedIn    Election       @relation(fields: [electionId], references: [id])
+  votedIn    Election        @relation(fields: [electionId], references: [id])
   electionId Int
   voteFor    PollingOptions? @relation(fields: [optionId], references: [id])
   optionId   Int?
-  
+
   @@unique([user_id, electionId])
 }

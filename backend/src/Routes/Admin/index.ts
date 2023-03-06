@@ -6,11 +6,10 @@ import { getElections } from "../../Controller/Admin/getElections";
 import { getVote } from "../../Controller/Admin/getUserVote";
 import { registerVote } from "../../Controller/Admin/registerVote";
 import { updateElection } from "../../Controller/Admin/updateElection";
-import { createPickupRequest } from "../../Controller/PickupRequest/create.controller";
 import { authenticateAdmin } from "../../Middlewares/adminAuth";
 import { authenticateWithJwt } from "../../Middlewares/jwtAuth";
 import { validateRequestPayload } from "../../Middlewares/validateRequestPayload";
-import { createElectionSchema, createVoteSchema, updateElectionSchema, updateFoodRequestSchema } from "../../Schemas/Admin";
+import { createElectionSchema, createVoteSchema, updateElectionSchema } from "../../Schemas/Admin";
 
 
 export const AdminRouter = Router();

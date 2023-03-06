@@ -18,8 +18,11 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var DB_exports = {};
 __export(DB_exports, {
+  BankRepository: () => BankRepository,
   ElectionOptionRepository: () => ElectionOptionRepository,
   ElectionRepository: () => ElectionRepository,
+  LoanAttachmentRepository: () => LoanAttachmentRepository,
+  LoanRepository: () => LoanRepository,
   PickupRequestRepository: () => PickupRequestRepository,
   UsersRepository: () => UsersRepository,
   VoteRepository: () => VoteRepository,
@@ -33,10 +36,16 @@ const PickupRequestRepository = db.pickupRequest;
 const ElectionRepository = db.election;
 const ElectionOptionRepository = db.pollingOptions;
 const VoteRepository = db.vote;
+const LoanRepository = db.loan;
+const LoanAttachmentRepository = db.loanAttachments;
+const BankRepository = db.bank;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  BankRepository,
   ElectionOptionRepository,
   ElectionRepository,
+  LoanAttachmentRepository,
+  LoanRepository,
   PickupRequestRepository,
   UsersRepository,
   VoteRepository,

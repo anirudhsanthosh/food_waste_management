@@ -1,13 +1,13 @@
-import express, { json, NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import * as dotenv from "dotenv";
-import { UserRouter } from "./Routes/User";
+import express, { json } from "express";
 import { CorsConfig } from "./Config/Cors";
 import { ExceptionHandler, PayloadErrorHandler } from "./Middlewares/handleErrors";
-import { PickupRequestRouter } from "./Routes/PickupRequest";
 import { AdminRouter } from "./Routes/Admin";
+import { LoanRouter } from "./Routes/Loan";
+import { UserRouter } from "./Routes/User";
 dotenv.config();
 
 export const App = express();
@@ -31,7 +31,7 @@ function initServer() {
 
         App.use('/user',UserRouter);
 
-        App.use('/request',PickupRequestRouter);
+        App.use('/loan',LoanRouter);
 
         App.use('/admin',AdminRouter);
 
