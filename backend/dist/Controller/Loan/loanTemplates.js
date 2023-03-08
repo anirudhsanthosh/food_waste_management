@@ -22,13 +22,78 @@ __export(loanTemplates_exports, {
 });
 module.exports = __toCommonJS(loanTemplates_exports);
 async function getLoanTemplates(request, response, next) {
-  const loans = [
-    { name: "HDFC" },
-    { name: "Federal Bank" },
-    { name: "SBI" },
-    { name: "ICICI" },
-    { name: "Kotak Mahindra" }
-  ];
+  const loans = {
+    "housingLoan": [
+      {
+        name: "Happy family",
+        description: "",
+        duration: [
+          { duration: 100, interestRate: 14 },
+          { duration: 150, interestRate: 15 },
+          { duration: 200, interestRate: 16 },
+          { duration: 250, interestRate: 18 }
+        ],
+        type: "housingLoan"
+      },
+      {
+        name: "Retirement Home",
+        description: "",
+        duration: [
+          { duration: 100, interestRate: 14 },
+          { duration: 150, interestRate: 15 },
+          { duration: 200, interestRate: 16 },
+          { duration: 250, interestRate: 18 }
+        ],
+        type: "housingLoan"
+      },
+      {
+        name: "Sweet home",
+        description: "",
+        duration: [
+          { duration: 100, interestRate: 14 },
+          { duration: 150, interestRate: 15 },
+          { duration: 200, interestRate: 16 },
+          { duration: 250, interestRate: 18 }
+        ],
+        type: "housingLoan"
+      }
+    ],
+    "carLoan": [
+      {
+        name: "Happy family",
+        description: "",
+        duration: [
+          { duration: 100, interestRate: 14 },
+          { duration: 150, interestRate: 15 },
+          { duration: 200, interestRate: 16 },
+          { duration: 250, interestRate: 18 }
+        ],
+        type: "carLoan"
+      },
+      {
+        name: "Dream Car",
+        description: "",
+        duration: [
+          { duration: 100, interestRate: 14 },
+          { duration: 150, interestRate: 15 },
+          { duration: 200, interestRate: 16 },
+          { duration: 250, interestRate: 18 }
+        ],
+        type: "carLoan"
+      },
+      {
+        name: "Children's Pappa",
+        description: "",
+        duration: [
+          { duration: 100, interestRate: 14 },
+          { duration: 150, interestRate: 15 },
+          { duration: 200, interestRate: 16 },
+          { duration: 250, interestRate: 18 }
+        ],
+        type: "carLoan"
+      }
+    ]
+  };
   response.json(loans);
 }
 // Annotate the CommonJS export names for ESM import in node:

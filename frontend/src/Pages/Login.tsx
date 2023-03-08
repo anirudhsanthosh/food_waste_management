@@ -45,13 +45,13 @@ export const Login: React.FC = () => {
     };
 
     return (
-        <div className="min-w-screen min-h-screen flex items-center justify-center gap-5">
+        <div className="min-w-screen min-h-screen flex items-center justify-center gap-5 bg-img">
             <div>
-                <figure>
-                    <img className="max-h-[80vh]" src="/assets/undraw_projections_re_ulc6.svg" alt="Shoes" />
-                </figure>
+                {/* <figure>
+                    <img className="max-h-[80vh]" src="/assets/supply-chain-finance.png" alt="Shoes" />
+                </figure> */}
             </div>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 shadow-xl glass">
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
                         <h2 className="card-title text-center">Login</h2>
