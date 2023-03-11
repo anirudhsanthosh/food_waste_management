@@ -26,9 +26,14 @@ async function createLoan(request, response, next) {
   try {
     const newRequest = request;
     const { user } = newRequest;
-    const { amount, duration, installments, interestRate, attachments } = newRequest.body;
+    const { amount, duration, installments, interestRate, attachments, address, bank, loan_name, name } = newRequest.body;
     const newLoan = await import_DB.LoanRepository.create({
       data: {
+        //@ts-ignore
+        address,
+        bank,
+        loan_name,
+        name,
         amount: Number(amount),
         duration: Number(duration),
         installments: Number(installments),

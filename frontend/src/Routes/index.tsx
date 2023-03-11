@@ -6,12 +6,17 @@ import { Dashboard } from "../Pages/Dashboard";
 import ErrorPage from "../Pages/Error";
 import { Login } from "../Pages/Login";
 import { Register } from "../Pages/Register";
-import { CreatePickup } from "../Pages/newPickup";
+import { CreateLoan } from "../Pages/newPickup";
 import { RequireToBeAdmin } from "../Components/Auth/admin";
 import { AdminDashboard } from "../Pages/AdminDashboard";
 import { Election } from "../Pages/Election";
 import { ElectionView } from "../Pages/viewElection";
 import { Vote } from "../Pages/vote";
+import { ChooseBank } from "../Pages/chooseBank";
+import { ChooseCategory } from "../Pages/chooseCategory";
+import { Loan } from "../Pages/createLoan";
+import { ShowLoans } from "../Pages/showLoans";
+import { AdminDashboardAll } from "../Pages/AdminDashboardAll";
 
 export const router = createBrowserRouter([
     {
@@ -39,11 +44,25 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: "",
-                        element: <AdminDashboard/>,
+                        element: <ShowLoans/>,
                     },
                     {
                         path: "new",
-                        element: <CreatePickup />,
+                        element: <CreateLoan />,
+                        children:[
+                            {
+                                path: "",
+                                element: <ChooseBank/>,
+                            },
+                            {
+                                path: ":bankId",
+                                element: <ChooseCategory/>,
+                            },
+                            {
+                                path: ":bankId/:category",
+                                element: <Loan/>,
+                            },
+                        ]
                     },
                     {
                         path: "election/:electionId",
@@ -61,6 +80,10 @@ export const router = createBrowserRouter([
                             {
                                 path: "",
                                 element: <AdminDashboard/>,
+                            },
+                            {
+                                path: "all",
+                                element: <AdminDashboardAll/>,
                             },
 
                             {

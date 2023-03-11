@@ -22,14 +22,24 @@ __export(Loan_exports, {
 });
 module.exports = __toCommonJS(Loan_exports);
 var import_express = require("express");
-var import_getElections = require("../../Controller/Admin/getElections");
+var import_changeStatusAdmin = require("../../Controller/Loan/changeStatusAdmin");
 var import_create = require("../../Controller/Loan/create");
+var import_getBanks = require("../../Controller/Loan/getBanks");
+var import_getLoan = require("../../Controller/Loan/getLoan");
+var import_getLoanAdmin = require("../../Controller/Loan/getLoanAdmin");
+var import_getLoanAdminAll = require("../../Controller/Loan/getLoanAdminAll");
+var import_loanTemplates = require("../../Controller/Loan/loanTemplates");
 var import_jwtAuth = require("../../Middlewares/jwtAuth");
 var import_validateRequestPayload = require("../../Middlewares/validateRequestPayload");
 var import_Loan = require("../../Schemas/Loan");
 const LoanRouter = (0, import_express.Router)();
-LoanRouter.get("/elections", import_jwtAuth.authenticateWithJwt, import_getElections.getElections);
+LoanRouter.get("/banks", import_jwtAuth.authenticateWithJwt, import_getBanks.getBanks);
+LoanRouter.get("/templates", import_jwtAuth.authenticateWithJwt, import_loanTemplates.getLoanTemplates);
+LoanRouter.get("/", import_jwtAuth.authenticateWithJwt, import_getLoan.getLoan);
+LoanRouter.get("/all", import_jwtAuth.authenticateWithJwt, import_getLoanAdminAll.getLoanAdminAll);
+LoanRouter.get("/admin", import_jwtAuth.authenticateWithJwt, import_getLoanAdmin.getLoanAdmin);
 LoanRouter.post("/", import_jwtAuth.authenticateWithJwt, (0, import_validateRequestPayload.validateRequestPayload)(import_Loan.createLoanSchema), import_create.createLoan);
+LoanRouter.put("/", import_jwtAuth.authenticateWithJwt, (0, import_validateRequestPayload.validateRequestPayload)(import_Loan.updateLoanStatusSchema), import_changeStatusAdmin.updateLoanStatus);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   LoanRouter

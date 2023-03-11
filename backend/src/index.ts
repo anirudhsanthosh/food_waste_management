@@ -8,6 +8,8 @@ import { ExceptionHandler, PayloadErrorHandler } from "./Middlewares/handleError
 import { AdminRouter } from "./Routes/Admin";
 import { LoanRouter } from "./Routes/Loan";
 import { UserRouter } from "./Routes/User";
+import multer from "multer";
+
 dotenv.config();
 
 export const App = express();
@@ -20,20 +22,38 @@ function initServer() {
         App.use(json({ limit: "5mb" }));
 
         App.use(cookieParser())
-        
+
         App.use(bodyParser.urlencoded({ extended: true }));
-        
+
         App.use(cors(CorsConfig));
-        
+
         App.use(PayloadErrorHandler);
+
+        const storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, "./upload");
+            },
+            filename: function (req, file, cb) {
+                cb(null, Date.now() + file.originalname);
+            },
+        });
+
+        const upload = multer({ storage });
+
+        App.post("/upload", upload.single("file"), function (req: any, res: any) {
+            const file = req.file;
+            res.status(200).json(file.filename);
+        });
+
+        App.use('/upload', express.static('upload'))
 
         App.get("/", (req, res) => res.send(`Hey there it's lonely here..... 😔`))
 
-        App.use('/user',UserRouter);
+        App.use('/user', UserRouter);
 
-        App.use('/loan',LoanRouter);
+        App.use('/loan', LoanRouter);
 
-        App.use('/admin',AdminRouter);
+        App.use('/admin', AdminRouter);
 
         App.use(ExceptionHandler)
 

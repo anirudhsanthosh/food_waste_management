@@ -1,34 +1,21 @@
-import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { Card } from "../Components/common/Card/card";
-import { SpinnerWithText } from "../Components/common/Loader/SpinnerWithText";
-import { useAdmin } from "../Hooks/Data/useAdmin";
-import { useUserData } from "../Hooks/Data/useUserData";
 import { useLoan } from "../Hooks/useLoan";
 
-export const AdminDashboard: React.FC = () => {
-    const { loansAdmin, statusMutation } = useLoan();
+export const ShowLoans = () => {
+    const { loans } = useLoan();
 
-    const statuses = ["pending", "rejected", "approved"];
-
-    const handleStatusChange = async (status: string, loan: any) => {
-        try {
-            await statusMutation.mutateAsync({ status, loanId: loan.id });
-            toast.success("updated status");
-        } catch (err) {
-            toast.error("Failed to update status");
-        }
-    };
+    if (loans.isLoading) return <div>Loading data.....</div>;
 
     return (
         <div className="w-full flex flex-col px-48 py-6 gap-4 bg-img min-h-screen">
-            <h1 className="pb-6 text-xl font-bold">Pending Loan applications</h1>
+            <h1 className="pb-6 text-xl font-bold">Loan applications</h1>
 
-            {loansAdmin.isLoading && <div>Loading data.....</div>}
-
-            {loansAdmin.data && loansAdmin.data?.length === 0 && <div>Hooreyyyyy no pending loans</div>}
-
-            {loansAdmin.data?.map((loan) => {
+            {loans.data?.length === 0 && (
+                <div>
+                    No Applications found create one from <Link to="/new" className="text-blue-800">here</Link>
+                </div>
+            )}
+            {loans.data?.map((loan) => {
                 return (
                     <div className="w-full p-6 border-4 border-primary  rounded-md glass">
                         <div className="flex gap-5 ">
@@ -58,18 +45,6 @@ export const AdminDashboard: React.FC = () => {
                         <div className="flex gap-5 ">
                             <span className="font-bold">Scheme</span>
                             <span>{loan.loan_name}</span>
-                        </div>
-                        <div className="py-3">Documents</div>
-                        <div className="flex gap-5 ">
-                            {loan.LoanAttachments?.map((file:any) => <a href={`http://localhost:5000/upload/${file.file}`} download={file.title} target="_blank" className="btn btn-secondary btn-sm">{file.title}</a>)}
-                        </div>
-                        <div className="flex gap-5 py-4">Change status to</div>
-                        <div className="flex gap-5 ">
-                            {statuses.map((stat) => (
-                                <button className="btn btn-primary" onClick={() => handleStatusChange(stat, loan)}>
-                                    {stat}
-                                </button>
-                            ))}
                         </div>
                     </div>
                 );

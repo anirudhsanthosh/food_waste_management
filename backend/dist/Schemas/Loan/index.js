@@ -30,7 +30,8 @@ var Loan_exports = {};
 __export(Loan_exports, {
   attachmentItemsSchema: () => attachmentItemsSchema,
   createBankSchema: () => createBankSchema,
-  createLoanSchema: () => createLoanSchema
+  createLoanSchema: () => createLoanSchema,
+  updateLoanStatusSchema: () => updateLoanStatusSchema
 });
 module.exports = __toCommonJS(Loan_exports);
 var import_joi = __toESM(require("joi"));
@@ -39,8 +40,10 @@ const attachmentItemsSchema = import_joi.default.object({
   title: import_joi.default.string().min(4).required()
 });
 const createLoanSchema = import_joi.default.object({
-  // title: Joi.string().min(1).required(),
-  // description: Joi.string().min(5).required(),
+  bank: import_joi.default.string().min(1).required(),
+  loan_name: import_joi.default.string().min(1).required(),
+  name: import_joi.default.string().min(1).required(),
+  address: import_joi.default.string().min(1).required(),
   amount: import_joi.default.number().min(100).required(),
   duration: import_joi.default.number().min(3).required(),
   interestRate: import_joi.default.number().min(1).required(),
@@ -50,9 +53,14 @@ const createLoanSchema = import_joi.default.object({
 const createBankSchema = import_joi.default.object({
   name: import_joi.default.string().min(1).required()
 });
+const updateLoanStatusSchema = import_joi.default.object({
+  status: import_joi.default.string().valid("pending", "approved", "rejected").required(),
+  loanId: import_joi.default.number().min(1).required()
+});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   attachmentItemsSchema,
   createBankSchema,
-  createLoanSchema
+  createLoanSchema,
+  updateLoanStatusSchema
 });

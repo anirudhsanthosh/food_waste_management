@@ -1,17 +1,31 @@
 import { Router } from "express";
 import { getElections } from "../../Controller/Admin/getElections";
+import { updateLoanStatus } from "../../Controller/Loan/changeStatusAdmin";
 import { createLoan } from "../../Controller/Loan/create";
+import { getBanks } from "../../Controller/Loan/getBanks";
+import { getLoan } from "../../Controller/Loan/getLoan";
+import { getLoanAdmin } from "../../Controller/Loan/getLoanAdmin";
+import { getLoanAdminAll } from "../../Controller/Loan/getLoanAdminAll";
+import { getLoanTemplates } from "../../Controller/Loan/loanTemplates";
 import { authenticateWithJwt } from "../../Middlewares/jwtAuth";
 import { validateRequestPayload } from "../../Middlewares/validateRequestPayload";
-import { createLoanSchema } from "../../Schemas/Loan";
+import { createLoanSchema, updateLoanStatusSchema } from "../../Schemas/Loan";
 
 
 export const LoanRouter = Router();
 
 
-LoanRouter.get('/elections', authenticateWithJwt, getElections);
+LoanRouter.get('/banks', authenticateWithJwt, getBanks);
 
-LoanRouter.post('/', authenticateWithJwt,validateRequestPayload(createLoanSchema), createLoan);
+LoanRouter.get('/templates', authenticateWithJwt, getLoanTemplates);
+
+LoanRouter.get('/', authenticateWithJwt, getLoan);
+LoanRouter.get('/all', authenticateWithJwt, getLoanAdminAll);
+
+LoanRouter.get('/admin', authenticateWithJwt, getLoanAdmin);
+
+LoanRouter.post('/', authenticateWithJwt, validateRequestPayload(createLoanSchema), createLoan);
+LoanRouter.put('/', authenticateWithJwt, validateRequestPayload(updateLoanStatusSchema), updateLoanStatus);
 
 // LoanRouter.get('/elections/:electionId', authenticateWithJwt, getElection);
 

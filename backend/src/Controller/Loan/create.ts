@@ -9,10 +9,13 @@ export async function createLoan(request: Request, response: Response, next: Nex
 
         const { user } = newRequest;
 
-        const { amount, duration, installments, interestRate, attachments } = newRequest.body;
+        const { amount, duration, installments, interestRate, attachments, address, bank, loan_name, name } = newRequest.body;
 
         const newLoan = await LoanRepository.create({
             data: {
+                //@ts-ignore
+                address,
+                bank, loan_name, name,
                 amount: Number(amount),
                 duration: Number(duration),
                 installments: Number(installments),

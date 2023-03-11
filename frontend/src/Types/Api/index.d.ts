@@ -30,14 +30,14 @@ declare module API {
 
     interface updateElectionPayload extends createElectionPayload {
         electionId: string
-        status : string
-        options: { title: string, description: string, id : number }[]
+        status: string
+        options: { title: string, description: string, id: number }[]
     }
-    
+
 
     interface createVoteParams {
-        electionId : number,
-        optionId : number
+        electionId: number,
+        optionId: number
     }
 
 
@@ -59,6 +59,19 @@ declare module API {
     interface adminPickupUpdateParams {
         pickupId: number,
         status: string,
+    }
+
+    interface bank {
+        name: string
+    }
+
+    interface loanTemplates {
+        [ key: string ]: {
+            name: string,
+            description: string,
+            duration: { duration: number, interestRate: number }[],
+            type: string
+        }[]
     }
 }
 

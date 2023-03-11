@@ -7,8 +7,10 @@ export const attachmentItemsSchema = Joi.object({
 
 
 export const createLoanSchema = Joi.object({
-    // title: Joi.string().min(1).required(),
-    // description: Joi.string().min(5).required(),
+    bank: Joi.string().min(1).required(),
+    loan_name: Joi.string().min(1).required(),
+    name: Joi.string().min(1).required(),
+    address: Joi.string().min(1).required(),
     amount: Joi.number().min(100).required(),
     duration: Joi.number().min(3).required(),
     interestRate: Joi.number().min(1).required(),
@@ -19,6 +21,10 @@ export const createLoanSchema = Joi.object({
 
 export const createBankSchema = Joi.object({
     name: Joi.string().min(1).required(),
+})
+export const updateLoanStatusSchema = Joi.object({
+    status: Joi.string().valid('pending','approved','rejected').required(),
+    loanId : Joi.number().min(1).required(),
 })
 
 

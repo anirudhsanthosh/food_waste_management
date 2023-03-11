@@ -31,7 +31,10 @@ model Loan {
   status    String @default("pending")
   belongsTo User   @relation(fields: [user_id], references: [id])
   user_id   Int
-
+  name String?
+  address String?
+  bank String?
+  loan_name String?
   amount          Int
   duration        Int
   interestRate    Float

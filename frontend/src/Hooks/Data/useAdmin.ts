@@ -3,10 +3,10 @@ import { AdminClient } from "../../Api/admin";
 import { PickupClient } from "../../Api/pickups";
 
 export function useAdmin() {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const elections = useQuery('admin/elections', AdminClient.getAllElections);
-  
+
 
   const addMutation = useMutation((value: API.createElectionPayload) => AdminClient.create(value), {
 
@@ -19,6 +19,7 @@ export function useAdmin() {
   //   onSuccess: () => queryClient.invalidateQueries('admin'),
 
   // })
+
   const deleteMutation = useMutation((pickupId: number) => PickupClient.cancel(pickupId), {
 
     onSuccess: () => queryClient.invalidateQueries('pickups'),

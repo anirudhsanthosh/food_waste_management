@@ -41,6 +41,7 @@ var import_handleErrors = require("./Middlewares/handleErrors");
 var import_Admin = require("./Routes/Admin");
 var import_Loan = require("./Routes/Loan");
 var import_User = require("./Routes/User");
+var import_multer = __toESM(require("multer"));
 dotenv.config();
 const App = (0, import_express.default)();
 initServer();
@@ -51,6 +52,20 @@ function initServer() {
     App.use(import_body_parser.default.urlencoded({ extended: true }));
     App.use((0, import_cors.default)(import_Cors.CorsConfig));
     App.use(import_handleErrors.PayloadErrorHandler);
+    const storage = import_multer.default.diskStorage({
+      destination: function(req, file, cb) {
+        cb(null, "./upload");
+      },
+      filename: function(req, file, cb) {
+        cb(null, Date.now() + file.originalname);
+      }
+    });
+    const upload = (0, import_multer.default)({ storage });
+    App.post("/upload", upload.single("file"), function(req, res) {
+      const file = req.file;
+      res.status(200).json(file.filename);
+    });
+    App.use("/upload", import_express.default.static("upload"));
     App.get("/", (req, res) => res.send(`Hey there it's lonely here..... \u{1F614}`));
     App.use("/user", import_User.UserRouter);
     App.use("/loan", import_Loan.LoanRouter);

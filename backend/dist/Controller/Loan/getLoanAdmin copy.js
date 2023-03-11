@@ -16,33 +16,19 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var create_exports = {};
-__export(create_exports, {
-  createLoan: () => createLoan
+var getLoanAdmin_copy_exports = {};
+__export(getLoanAdmin_copy_exports, {
+  getLoanAdmin: () => getLoanAdmin
 });
-module.exports = __toCommonJS(create_exports);
+module.exports = __toCommonJS(getLoanAdmin_copy_exports);
 var import_DB = require("../../DB");
-async function createLoan(request, response, next) {
+async function getLoanAdmin(request, response, next) {
   try {
-    const newRequest = request;
-    const { user } = newRequest;
-    const { amount, duration, installments, interestRate, attachments, address, bank, loan_name, name } = newRequest.body;
-    const newLoan = await import_DB.LoanRepository.create({
-      data: {
-        //@ts-ignore
-        address,
-        bank,
-        loan_name,
-        name,
-        amount: Number(amount),
-        duration: Number(duration),
-        installments: Number(installments),
-        interestRate: Number(interestRate),
-        user_id: user.id
+    const newLoan = await import_DB.LoanRepository.findMany({
+      where: {
+        status: "pending"
       }
     });
-    const newAttachments = attachments.map((attachment) => import_DB.LoanAttachmentRepository.create({ data: { ...attachment, loan_id: newLoan.id } }));
-    await Promise.all(newAttachments);
     response.json(newLoan);
   } catch (err) {
     next(err);
@@ -50,5 +36,5 @@ async function createLoan(request, response, next) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  createLoan
+  getLoanAdmin
 });

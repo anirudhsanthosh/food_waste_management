@@ -8,6 +8,8 @@ import { SpinnerWithText } from "../Components/common/Loader/SpinnerWithText";
 import { usePickup } from "../Hooks/Data/usePickups";
 
 export const Dashboard: React.FC = () => {
+
+    return <div></div>
     const { pickups, isError, isLoading, error, deleteMutation } = usePickup();
 
     const { isLoading: isDeleting, mutateAsync } = deleteMutation;
