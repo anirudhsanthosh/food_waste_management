@@ -24,11 +24,14 @@ module.exports = __toCommonJS(create_controller_exports);
 var import_DB = require("../../DB");
 async function createPickupRequest(request, response, next) {
   const newRequest = request;
-  const { address, quantity } = newRequest.body;
+  const { address, quantity, date, phone, place } = newRequest.body;
   const { user } = newRequest;
   const data = {
     address,
     quantity,
+    date,
+    phone,
+    place,
     status: "pending",
     user_id: user.id
   };

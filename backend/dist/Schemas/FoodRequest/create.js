@@ -34,6 +34,9 @@ module.exports = __toCommonJS(create_exports);
 var import_joi = __toESM(require("joi"));
 const createFoodRequestSchema = import_joi.default.object({
   address: import_joi.default.string().min(15).max(200).required(),
+  phone: import_joi.default.string().min(10).max(15).required(),
+  place: import_joi.default.string().min(3).max(200).required(),
+  date: import_joi.default.date().required(),
   quantity: import_joi.default.number().min(1).max(500).required()
 });
 // Annotate the CommonJS export names for ESM import in node:
