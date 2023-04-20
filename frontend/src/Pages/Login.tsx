@@ -47,7 +47,7 @@ export const Login: React.FC = () => {
     return (
         <div className="min-w-screen min-h-screen flex items-center justify-center gap-5">
             <div>
-                <div className="text-2xl font-bold pb-6 text-primary">Organisation and Education institution options</div>
+                <div className="text-2xl font-bold pb-6 text-primary">Chit Chat</div>
                 <figure>
                     <img className="max-h-[80vh]" src="/assets/undraw_projections_re_ulc6.svg" alt="Shoes" />
                 </figure>
