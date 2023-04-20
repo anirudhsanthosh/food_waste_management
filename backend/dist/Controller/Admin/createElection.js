@@ -33,11 +33,16 @@ async function createElection(request, response, next) {
     const data = {
       title: option.title,
       description: option.description,
-      pollId: newElection.id,
-      startingDate: startTime,
-      endingDate: endTime
+      pollId: newElection.id
+      // startingDate : startTime, 
+      // endingDate : endTime, 
     };
-    return await import_DB.ElectionOptionRepository.create({ data });
+    console.log("dasfasfsasfsafasf====>", data);
+    try {
+      return await import_DB.ElectionOptionRepository.create({ data });
+    } catch (err) {
+      console.log("ddddDADADADAD==============>", err);
+    }
   });
   await Promise.allSettled(newOptions);
   return response.send(newElection);

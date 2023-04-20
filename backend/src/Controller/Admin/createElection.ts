@@ -22,10 +22,20 @@ export async function createElection(request: Request, response: Response, next:
             title: option.title,
             description: option.description,
             pollId: newElection.id,
-            startingDate : startTime, 
-            endingDate : endTime, 
+            // startingDate : startTime, 
+            // endingDate : endTime, 
         }
-        return await ElectionOptionRepository.create({ data })
+
+
+        console.log("dasfasfsasfsafasf====>",data)
+
+        try{
+
+            
+            return await ElectionOptionRepository.create({ data })
+        }catch(err){
+            console.log("ddddDADADADAD==============>",err)
+        }
     })
 
     await Promise.allSettled(newOptions);
