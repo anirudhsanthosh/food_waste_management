@@ -7,18 +7,21 @@ import { authenticateWithJwt } from "../../Middlewares/jwtAuth";
 import { validateRequestPayload } from "../../Middlewares/validateRequestPayload";
 import { loginSchema } from "../../Schemas/User/Login";
 import { signUpSchema } from "../../Schemas/User/SignUp";
+import { gpt } from "../../Controller/User/gptcontroller";
 
 
 
 export const UserRouter = Router()
 
-UserRouter.get('/', authenticateWithJwt,getUser)
+UserRouter.get('/', authenticateWithJwt, getUser)
 
-UserRouter.post('/signup', validateRequestPayload(signUpSchema),signUp);
+UserRouter.post('/signup', validateRequestPayload(signUpSchema), signUp);
 
-UserRouter.post('/login', validateRequestPayload(loginSchema),login);
+UserRouter.post('/login', validateRequestPayload(loginSchema), login);
 
 UserRouter.post('/logout', logout);
+
+UserRouter.post('/gpt', gpt);
 
 
 

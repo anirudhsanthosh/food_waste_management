@@ -30,11 +30,13 @@ var import_jwtAuth = require("../../Middlewares/jwtAuth");
 var import_validateRequestPayload = require("../../Middlewares/validateRequestPayload");
 var import_Login = require("../../Schemas/User/Login");
 var import_SignUp = require("../../Schemas/User/SignUp");
+var import_gptcontroller = require("../../Controller/User/gptcontroller");
 const UserRouter = (0, import_express.Router)();
 UserRouter.get("/", import_jwtAuth.authenticateWithJwt, import_get.getUser);
 UserRouter.post("/signup", (0, import_validateRequestPayload.validateRequestPayload)(import_SignUp.signUpSchema), import_signUp.signUp);
 UserRouter.post("/login", (0, import_validateRequestPayload.validateRequestPayload)(import_Login.loginSchema), import_login.login);
 UserRouter.post("/logout", import_logout.logout);
+UserRouter.post("/gpt", import_gptcontroller.gpt);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   UserRouter

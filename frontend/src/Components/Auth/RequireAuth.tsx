@@ -25,13 +25,6 @@ export const RequireAuth: React.FC<RequireAuth> = ({}) => {
             <div className="min-w-full min-h-full pt-3 flex flex-1">
                 <Outlet />
             </div>
-            {user && user.role === "admin" && (
-                <div className="fixed  bottom-8 right-8 ">
-                    <Link to={"/admin/election"}>
-                        <button className="btn btn-square btn-primary text-2xl shadow-lg">+</button>
-                    </Link>
-                </div>
-            )}
         </>
     );
 };
