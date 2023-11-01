@@ -6,3 +6,5 @@ export const Exceptions = {
     ...commonExceptions,
     ...authExceptions,
 }
+
+export default Exceptions;

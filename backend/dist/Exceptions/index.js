@@ -28,7 +28,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var Exceptions_exports = {};
 __export(Exceptions_exports, {
-  Exceptions: () => Exceptions
+  Exceptions: () => Exceptions,
+  default: () => Exceptions_default
 });
 module.exports = __toCommonJS(Exceptions_exports);
 var import_Common = __toESM(require("./Common"));
@@ -37,6 +38,7 @@ const Exceptions = {
   ...import_Common.default,
   ...import_auth.default
 };
+var Exceptions_default = Exceptions;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Exceptions
