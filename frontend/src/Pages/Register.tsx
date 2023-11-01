@@ -26,13 +26,20 @@ export const Register: React.FC = () => {
             entries[key] = entry[1] as string;
         }
 
-        const { email, password, name, confirmPassword } = entries;
+        const { email, password, name, confirmPassword, age, gender, bloodGroup } = entries;
 
         if (password !== confirmPassword) return toast.error(`password must be same as confirm password`);
 
         try {
             setLoading(true);
-            const user = await UserClient.register({ email, password, name });
+            const user = await UserClient.register({
+                email,
+                password,
+                name,
+                age: Number(age),
+                gender: gender as "male" | "female",
+                bloodGroup,
+            });
             setRegisteredSuccessfully(true);
 
             // navigate('')
@@ -88,6 +95,44 @@ export const Register: React.FC = () => {
                                         placeholder="Confirm Password"
                                         className="input input-bordered input-primary w-full max-w-xs"
                                     />
+                                </div>
+                                <div className="py-1">
+                                    <input
+                                        type="number"
+                                        name="age"
+                                        placeholder="Age"
+                                        className="input input-bordered input-primary w-full max-w-xs"
+                                    />
+                                </div>
+                                <div className="py-1">
+                                    <input
+                                        type="text"
+                                        name="bloodGroup"
+                                        placeholder="Blood Group"
+                                        className="input input-bordered input-primary w-full max-w-xs"
+                                    />
+                                </div>
+                                <div className="py-1 flex flex-col gap-2">
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="male"
+                                            className="radio radio-primary"
+                                            id="gender-male"
+                                        />
+                                        <label htmlFor="gender-male">Male</label>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="female"
+                                            className="radio radio-primary"
+                                            id="gender-female"
+                                        />
+                                        <label htmlFor="gender-female">Female</label>
+                                    </div>
                                 </div>
                             </div>
                         )}

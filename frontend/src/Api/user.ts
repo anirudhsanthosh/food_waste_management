@@ -18,12 +18,12 @@ export class UserClient {
         return response.data;
     }
 
-    static register({ email, password, name }: { email: string, password: string, name: string }) {
+    static register(payload: { email: string, password: string, name: string, age: number, gender: 'male' | 'female', bloodGroup: string }) {
         return axios.post<{
             email: string,
             uuid: string,
             name: string | null,
-        }>('/user/signup', { email, password, name });
+        }>('/user/signup', payload);
     }
 
     static async logout() {

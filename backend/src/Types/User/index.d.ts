@@ -5,6 +5,9 @@ declare module User {
         email: string,
         name: string,
         password: string,
+        age: number
+        gender: 'male' | 'female'
+        bloodGroup: string
     }
 
     interface signUpResponse {

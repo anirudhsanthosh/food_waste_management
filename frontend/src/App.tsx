@@ -6,6 +6,8 @@ import { router } from "./Routes";
 
 const queryClient = new QueryClient();
 
+document.getElementsByTagName("html")[0].setAttribute("data-theme", "corporate");
+
 export const App: React.FC = () => {
     return (
         <>

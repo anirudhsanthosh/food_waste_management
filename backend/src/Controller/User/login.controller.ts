@@ -1,4 +1,4 @@
-import { CookieOptions, NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Config } from '../../Config';
 import { Exceptions } from '../../Exceptions';
 import { getUserByEmail } from '../../Repositories/User';
