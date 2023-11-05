@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { deleteUser, getAllUsers, getUser, updateUser } from "../../../Controller/Admin/users";
+import { deleteUser, donorFinder, getAllUsers, getUser, updateUser } from "../../../Controller/Admin/users";
 
 export const adminUserRouter = Router({});
+
+adminUserRouter.get('/finder', donorFinder);
 
 adminUserRouter.get('/', getAllUsers);
 

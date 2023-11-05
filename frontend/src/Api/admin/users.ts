@@ -8,6 +8,12 @@ export class AdminUsersClient {
         return response.data
     }
 
+    static async finder(params: { userQuery: string, bloodGroup: string }) {
+        const response = await axios.get<API.DonorFinder[]>('/admin/users/finder', { params });
+
+        return response.data
+    }
+
     static async get(id: number) {
         const response = await axios.get<API.AdminPanelSingleUserData>('/admin/users/' + id);
 

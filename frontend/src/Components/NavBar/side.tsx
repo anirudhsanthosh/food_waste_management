@@ -2,6 +2,7 @@ import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
 import { PiHandHeartBold, PiHandHeartLight, PiUsersThree } from "react-icons/pi";
 import { BiDonateBlood, BiUserVoice } from "react-icons/bi";
 import { BsBalloonHeart, BsClipboardData } from "react-icons/bs";
+import { TbUserSearch } from "react-icons/tb";
 import { FiLogOut } from "react-icons/fi";
 import { MdOutlineBloodtype, MdOutlineVerifiedUser } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -68,7 +69,7 @@ export const SideNav: React.FC = () => {
 function AdminMenu() {
     return (
         <>
-            <strong className="mt-10 w-full text-center flex items-center justify-center gap-2 text-primary">
+            <strong className="mt-4 w-full text-center flex items-center justify-center gap-2 text-primary">
                 <MdOutlineVerifiedUser className="text-xl" /> Admin
             </strong>
             <hr className="mb-1 border-t-primary/40"></hr>
@@ -106,6 +107,15 @@ function AdminMenu() {
                 >
                     <BsBalloonHeart className="text-xl" />
                     Donations
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to="/admin/finder"
+                    className={({ isActive }) => cn("whitespace-nowrap", isActive && "bg-primary text-white")}
+                >
+                    <TbUserSearch className="text-xl" />
+                    Donor Finder
                 </NavLink>
             </li>
         </>

@@ -219,6 +219,49 @@ export const SingleUserView: React.FC = () => {
                 <hr className="mx-20" />
 
                 <div className="py-4">
+                    <h2 className="text-xl" id="requests">
+                        Donations
+                    </h2>
+                </div>
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Blood Group
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    unit
+                                </th>
+
+                                <th scope="col" className="px-6 py-3">
+                                    created on
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {user.data?.donations?.map((report) => {
+                                return (
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            {user?.data?.blood?.name}
+                                        </th>
+                                        <td className="px-6 py-4">{report.unit}</td>
+                                        <td className="px-6 py-4">{report.createdAt}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div className="py-8">
+                <hr className="mx-20" />
+
+                <div className="py-4">
                     <h2 className="text-xl" id="healthReport">
                         Health Report
                     </h2>

@@ -21,6 +21,7 @@ import { SingleUserView } from "../Pages/admin/Users/singleUser";
 import { RequestManagement } from "../Pages/admin/requests";
 import { AdminBloodDonation } from "../Pages/admin/donations";
 import { AdminBloodDonationPopup } from "../Pages/admin/donations/popup";
+import { DonorFinder } from "../Pages/admin/donorFinder";
 
 export const router = createBrowserRouter([
     {
@@ -146,6 +147,10 @@ export const router = createBrowserRouter([
                             {
                                 path: "users/:id",
                                 element: <SingleUserView />,
+                            },
+                            {
+                                path: "finder",
+                                element: <DonorFinder />,
                             },
                             {
                                 path: "requests",

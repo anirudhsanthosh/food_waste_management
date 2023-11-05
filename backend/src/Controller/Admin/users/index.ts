@@ -80,3 +80,78 @@ export async function updateUser(request: Request, response: Response, next: Nex
     }
 
 }
+
+
+export async function donorFinder(request: Request, response: Response, next: NextFunction) {
+    const newRequest = request as unknown as AuthRequest<Request>
+
+    const { userQuery, bloodGroup } = newRequest.query;
+
+    const query = userQuery as string
+
+    console.log({ userQuery, bloodGroup })
+
+    try {
+
+        const user = await db.user.findMany({
+            where: {
+
+                bloodGroup: { equals: bloodGroup as string },
+                AND: [ {
+                    address: {
+                        some: {
+                            OR: [ {
+                                city: { contains: query },
+                            },
+                            {
+                                houseName: { contains: query }
+                            },
+                            {
+                                town: { contains: query }
+                            },
+                            {
+                                landmark: { contains: query },
+                            },
+                            {
+                                user: {
+                                    email: { contains: query }
+                                }
+                            },
+                            {
+                                user: {
+                                    name: { contains: query }
+                                }
+                            },
+                            ]
+                        }
+                    }
+                },
+                ]
+
+
+
+
+
+                // OR: {
+                //     name: { contains: query },
+                //     address: {
+                //         some: {
+                //             OR: {
+                //                 city: { contains: query },
+                //                 houseName: { contains: query },
+                //                 town: { contains: query },
+                //                 landmark: { contains: query },
+                //             }
+                //         }
+                //     }
+                // }
+            },
+            include: { blood: true, _count: { select: { address: true, donations: true, healthReports: true, requests: true } } }
+        })
+
+        response.json(user)
+    } catch (err) {
+        next(err);
+    }
+
+}
