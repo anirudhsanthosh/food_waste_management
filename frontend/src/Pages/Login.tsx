@@ -8,9 +8,9 @@ import { useLogin } from "../Hooks/Data/useUserData";
 export const Login: React.FC = () => {
     const navigate = useNavigate();
 
-    const {loginData,setLogin} = useLogin();
+    const { loginData, setLogin } = useLogin();
 
-    if(loginData) navigate('/',{replace : true});
+    if (loginData) navigate("/", { replace: true });
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
 
             setLogin(response);
 
-            navigate("/",{replace: true});
+            navigate("/", { replace: true });
         } catch (error: any) {
             toast.error("Failed to login please try again!");
             console.error(error);
@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
     };
 
     return (
-        <div className="min-w-screen min-h-screen flex items-center justify-center bg-primary/30">
+        <div className="w-full h-full flex items-center justify-center bg-primary/30">
             <div className="card w-96 bg-base-100 shadow-xl">
                 <figure>
                     <img src="/assets/loginFigure.jpg" alt="Shoes" />

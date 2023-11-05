@@ -6,7 +6,7 @@ import { router } from "./Routes";
 
 const queryClient = new QueryClient();
 
-document.getElementsByTagName("html")[0].setAttribute("data-theme", "corporate");
+document.getElementsByTagName("html")[0].setAttribute("data-theme", "fantasy");
 
 export const App: React.FC = () => {
     return (
@@ -14,7 +14,7 @@ export const App: React.FC = () => {
             <Toaster />
             <QueryClientProvider client={queryClient}>
                 <RouterProvider router={router} />
-                <ReactQueryDevtools />
+                <ReactQueryDevtools position="bottom-right" />
             </QueryClientProvider>
         </>
     );

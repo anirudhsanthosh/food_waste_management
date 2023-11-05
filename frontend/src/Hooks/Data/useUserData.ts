@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { UserClient } from "../../Api/user";
 import { Configurations } from "../../Config";
 
 export function useUserData() {
+    const queryClient = useQueryClient()
+
     const userData = useQuery('user', UserClient.get, { cacheTime: 60000, staleTime: 60000 })
 
-    return { user: userData.data, ...userData };
+    const update = useMutation(UserClient.update, {
+
+        onSuccess: () => queryClient.invalidateQueries('user'),
+
+    })
+
+    return { user: userData.data, ...userData, update };
 }
 
+
+
 export function useLogin() {
+
+    const queryClient = useQueryClient()
 
     const [ loginData, setLoginData ] = useState<string | null>('');
 
@@ -24,6 +36,8 @@ export function useLogin() {
     const setLogin = (data: any) => {
         localStorage.setItem(Configurations.LOGIN_STATUS, JSON.stringify(data));
         setLoginData(JSON.stringify(data))
+
+        queryClient.invalidateQueries('user')
 
     }
 

@@ -8,12 +8,19 @@ export class UserClient {
     }
 
     static async get() {
-        const response = await axios.get<{
-            email: string
-            name: string
-            uuid: string
-            role: 'user' | 'admin'
-        }>('/user/');
+        const response = await axios.get<API.User>('/user/');
+
+        return response.data;
+    }
+
+    static async dashboard() {
+        const response = await axios.get<API.Dashoard>('/user/dashboard');
+
+        return response.data;
+    }
+
+    static async update(params: Partial<API.User>) {
+        const response = await axios.patch<API.User>('/user/', params);
 
         return response.data;
     }
@@ -33,3 +40,4 @@ export class UserClient {
 
 // "email" : "anirudh1@test.com",
 //   "password" : "sdsdsdsad"
+

@@ -44,6 +44,7 @@
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "prisma": "^4.10.1",
-    "prisma-joi-generator": "^0.2.0"
+    "prisma-joi-generator": "^0.2.0",
+    "react-icons": "^4.11.0"
   }
 }

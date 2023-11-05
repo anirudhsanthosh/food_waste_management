@@ -4,14 +4,14 @@ import { Configurations } from "../../Config";
 import { useUserData } from "../../Hooks/Data/useUserData";
 import { NavBar } from "../NavBar";
 
-interface RequireToBeAdmin {}
+interface AdminLayout {}
 
-export const RequireToBeAdmin: React.FC<RequireToBeAdmin> = ({}) => {
+export const AdminLayout: React.FC<AdminLayout> = ({}) => {
     const navigate = useNavigate();
 
     const { user } = useUserData();
 
-    if (user && user?.role !== "admin") navigate("/",{replace:true});
+    if (user && user?.role !== "admin") navigate("/", { replace: true });
 
     return <Outlet />;
 };

@@ -5,5 +5,5 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function getUserByEmailAndUuid(email: string, uuid: string) {
-    return UsersRepository.findFirst({ where: { email, uuid }, include: { blood: true } })
+    return UsersRepository.findFirst({ where: { email, uuid }, include: { blood: true, address: true, } })
 }
