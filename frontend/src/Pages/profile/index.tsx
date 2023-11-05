@@ -8,6 +8,7 @@ import { Card } from "../../Components/common/Card/card";
 import { useAddress } from "../../Hooks/Data/useAddress";
 import { BsTrash } from "react-icons/bs";
 import { Page } from "../../Components/Layout/page";
+import { ThemeCHanger } from "../../Components/common/themeChanger";
 
 export const Profile: React.FC = () => {
     const { user, update } = useUserData();
@@ -45,6 +46,7 @@ export const Profile: React.FC = () => {
             success: "Address Deleted successfully",
         });
     }
+
     return (
         <Page>
             <div className="w-full flex justify-between">
@@ -81,6 +83,10 @@ export const Profile: React.FC = () => {
                             <PrimaryButton>Update</PrimaryButton>
                         </div>
                     </form>
+                    <div>
+                        <label>Theme</label>
+                        <ThemeCHanger />
+                    </div>
                 </div>
                 <div className="w-full max-h-full overflow-auto">
                     <h2 className="pb-4 text-xl">Address</h2>

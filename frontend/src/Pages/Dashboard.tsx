@@ -21,6 +21,7 @@ export const Dashboard: React.FC = () => {
         { label: "Availability", value: "stock" },
         { label: "Comments", value: "comments" },
     ];
+    // ---
 
     return (
         <div className="w-full px-4">
@@ -71,6 +72,7 @@ export const Dashboard: React.FC = () => {
                     </div>
                 </div>
             </div>
+
             <div className="w-full pt-10">
                 <h2 className="py-4">Availability</h2>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
