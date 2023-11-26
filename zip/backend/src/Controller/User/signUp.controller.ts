@@ -7,7 +7,7 @@ import { getUserByEmail } from '../../Repositories/User';
 
 export async function signUp(request: Mutate<Request, { body: User.signUp }>, response: Response, next: NextFunction) {
 
-    const { email, name, password } = request.body;
+    const { email, name, password, age, bloodGroup, gender } = request.body;
 
     try {
 
@@ -15,9 +15,9 @@ export async function signUp(request: Mutate<Request, { body: User.signUp }>, re
 
         if (existingUser) Exceptions.invalidRequest(`Email address '${email}' already exists. please login`);
 
-        const newUser = await createNewUser({ email, name, password });
+        const newUser = await createNewUser({ email, name, password, age, bloodGroup, gender });
 
-        const safeToReturn = _.omit(newUser, [ 'id','password' ]) as User.signUpResponse
+        const safeToReturn = _.omit(newUser, [ 'id', 'password' ]) as User.signUpResponse
 
         return response.json(safeToReturn);
 

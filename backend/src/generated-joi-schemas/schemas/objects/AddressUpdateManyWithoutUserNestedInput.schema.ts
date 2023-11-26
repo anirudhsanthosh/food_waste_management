@@ -4,6 +4,7 @@ import { AddressCreateWithoutUserInputSchemaObject } from './AddressCreateWithou
 import { AddressUncheckedCreateWithoutUserInputSchemaObject } from './AddressUncheckedCreateWithoutUserInput.schema';
 import { AddressCreateOrConnectWithoutUserInputSchemaObject } from './AddressCreateOrConnectWithoutUserInput.schema';
 import { AddressUpsertWithWhereUniqueWithoutUserInputSchemaObject } from './AddressUpsertWithWhereUniqueWithoutUserInput.schema';
+import { AddressCreateManyUserInputEnvelopeSchemaObject } from './AddressCreateManyUserInputEnvelope.schema';
 import { AddressWhereUniqueInputSchemaObject } from './AddressWhereUniqueInput.schema';
 import { AddressUpdateWithWhereUniqueWithoutUserInputSchemaObject } from './AddressUpdateWithWhereUniqueWithoutUserInput.schema';
 import { AddressUpdateManyWithWhereWithoutUserInputSchemaObject } from './AddressUpdateManyWithWhereWithoutUserInput.schema';
@@ -18,6 +19,7 @@ Joi.array().items(Joi.object().keys(AddressUncheckedCreateWithoutUserInputSchema
 Joi.array().items(Joi.object().keys(AddressCreateOrConnectWithoutUserInputSchemaObject))),
   upsert: Joi.alternatives().try(Joi.object().keys(AddressUpsertWithWhereUniqueWithoutUserInputSchemaObject),
 Joi.array().items(Joi.object().keys(AddressUpsertWithWhereUniqueWithoutUserInputSchemaObject))),
+  createMany: Joi.object().keys(AddressCreateManyUserInputEnvelopeSchemaObject),
   set: Joi.alternatives().try(Joi.object().keys(AddressWhereUniqueInputSchemaObject),
 Joi.array().items(Joi.object().keys(AddressWhereUniqueInputSchemaObject))),
   disconnect: Joi.alternatives().try(Joi.object().keys(AddressWhereUniqueInputSchemaObject),

@@ -10,49 +10,83 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+model Address {
+  id        String  @id @default(uuid())
+  houseName String?
+  landmark  String?
+  town      String?
+  city      String?
+  pin       Int?
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
 }
 
-
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model HealthReport {
+  id          String   @id @default(uuid())
+  bp          String?
+  cholesterol String?
+  weight      Int?
+  height      Int?
+  date        DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  uuid String      @unique @default(uuid())
-  email   String   @unique
-  name    String?
-  password String 
-  posts   Post[]
-  profile Profile?
-  role String @default("user")
-  pickupRequests PickupRequest[]
+  id            Int            @id @default(autoincrement())
+  uuid          String         @unique @default(uuid())
+  email         String         @unique
+  name          String?
+  password      String
+  gender        String
+  age           Int
+  bloodGroup    String
+  role          String         @default("user")
+  joinedOn      DateTime       @default(now())
+  blood         BloodGroup     @relation(fields: [bloodGroup], references: [id])
+  address       Address[]
+  healthReports HealthReport[]
+  donations     Donation[]
+  requests      Request[]
 }
 
-model PickupRequest {
-  id      Int      @id @default(autoincrement())
-  address String
-  status String
-  quantity Int
-  date String?
-  place String?
-  phone String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  requestedBy    User     @relation(fields: [user_id], references: [id])
-  user_id  Int
+model BloodGroup {
+  id        String     @id @default(uuid())
+  name      String
+  group     String
+  variation String
+  comments  String
+  stock     Int        @default(0)
+  createdAt DateTime   @default(now())
+  requests  Request[]
+  donations Donation[]
+  user      User[]
+
+  @@map("Blood")
+}
+
+model Donation {
+  id         String     @id @default(uuid())
+  createdAt  DateTime   @default(now())
+  unit       Int
+  bloodGroup String
+  userId     Int
+  blood      BloodGroup @relation(fields: [bloodGroup], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
+}
+
+model Request {
+  id         String     @id @default(uuid())
+  createdAt  DateTime   @default(now())
+  unit       Int
+  status     String     @default("pending")
+  blood      BloodGroup @relation(fields: [bloodGroup], references: [id])
+  bloodGroup String
+  user       User       @relation(fields: [userId], references: [id])
+  userId     Int
+}
+
+generator joi {
+  provider = "prisma-joi-generator"
+  output   = "../src/generated-joi-schemas"
 }

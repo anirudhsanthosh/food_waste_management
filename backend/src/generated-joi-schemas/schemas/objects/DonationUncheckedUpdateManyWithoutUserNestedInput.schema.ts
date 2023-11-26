@@ -4,6 +4,7 @@ import { DonationCreateWithoutUserInputSchemaObject } from './DonationCreateWith
 import { DonationUncheckedCreateWithoutUserInputSchemaObject } from './DonationUncheckedCreateWithoutUserInput.schema';
 import { DonationCreateOrConnectWithoutUserInputSchemaObject } from './DonationCreateOrConnectWithoutUserInput.schema';
 import { DonationUpsertWithWhereUniqueWithoutUserInputSchemaObject } from './DonationUpsertWithWhereUniqueWithoutUserInput.schema';
+import { DonationCreateManyUserInputEnvelopeSchemaObject } from './DonationCreateManyUserInputEnvelope.schema';
 import { DonationWhereUniqueInputSchemaObject } from './DonationWhereUniqueInput.schema';
 import { DonationUpdateWithWhereUniqueWithoutUserInputSchemaObject } from './DonationUpdateWithWhereUniqueWithoutUserInput.schema';
 import { DonationUpdateManyWithWhereWithoutUserInputSchemaObject } from './DonationUpdateManyWithWhereWithoutUserInput.schema';
@@ -18,6 +19,7 @@ Joi.array().items(Joi.object().keys(DonationUncheckedCreateWithoutUserInputSchem
 Joi.array().items(Joi.object().keys(DonationCreateOrConnectWithoutUserInputSchemaObject))),
   upsert: Joi.alternatives().try(Joi.object().keys(DonationUpsertWithWhereUniqueWithoutUserInputSchemaObject),
 Joi.array().items(Joi.object().keys(DonationUpsertWithWhereUniqueWithoutUserInputSchemaObject))),
+  createMany: Joi.object().keys(DonationCreateManyUserInputEnvelopeSchemaObject),
   set: Joi.alternatives().try(Joi.object().keys(DonationWhereUniqueInputSchemaObject),
 Joi.array().items(Joi.object().keys(DonationWhereUniqueInputSchemaObject))),
   disconnect: Joi.alternatives().try(Joi.object().keys(DonationWhereUniqueInputSchemaObject),

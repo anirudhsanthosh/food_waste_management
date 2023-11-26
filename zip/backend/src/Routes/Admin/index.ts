@@ -1,17 +1,23 @@
 import { Router } from "express";
-import { getPickupRequests } from "../../Controller/Admin/getPickups";
-import { updatePickupRequest } from "../../Controller/Admin/updatePickup";
-import { createPickupRequest } from "../../Controller/PickupRequest/create.controller";
 import { authenticateAdmin } from "../../Middlewares/adminAuth";
 import { authenticateWithJwt } from "../../Middlewares/jwtAuth";
-import { validateRequestPayload } from "../../Middlewares/validateRequestPayload";
-import { updateFoodRequestSchema } from "../../Schemas/Admin";
+import { bloodGroupRouter } from "./bloodGroup";
+import { adminUserRouter } from "./users";
+import { adminBloodRequestRouter } from "./requests";
+import { adminBloodDonationRouter } from "./donation";
 
 
 export const AdminRouter = Router();
 
+AdminRouter.use(authenticateWithJwt, authenticateAdmin)
 
-AdminRouter.get('/pickups', authenticateWithJwt,authenticateAdmin, getPickupRequests);
+AdminRouter.use('/users', adminUserRouter);
+
+AdminRouter.use('/request', adminBloodRequestRouter);
+
+AdminRouter.use('/donation', adminBloodDonationRouter);
+
+AdminRouter.use('/bloodGroup', bloodGroupRouter);
 
 
-AdminRouter.patch('/pickups/:pickupId', authenticateWithJwt,authenticateAdmin, validateRequestPayload(updateFoodRequestSchema), updatePickupRequest);
+

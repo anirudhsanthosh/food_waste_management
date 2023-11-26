@@ -4,6 +4,7 @@ import { HealthReportCreateWithoutUserInputSchemaObject } from './HealthReportCr
 import { HealthReportUncheckedCreateWithoutUserInputSchemaObject } from './HealthReportUncheckedCreateWithoutUserInput.schema';
 import { HealthReportCreateOrConnectWithoutUserInputSchemaObject } from './HealthReportCreateOrConnectWithoutUserInput.schema';
 import { HealthReportUpsertWithWhereUniqueWithoutUserInputSchemaObject } from './HealthReportUpsertWithWhereUniqueWithoutUserInput.schema';
+import { HealthReportCreateManyUserInputEnvelopeSchemaObject } from './HealthReportCreateManyUserInputEnvelope.schema';
 import { HealthReportWhereUniqueInputSchemaObject } from './HealthReportWhereUniqueInput.schema';
 import { HealthReportUpdateWithWhereUniqueWithoutUserInputSchemaObject } from './HealthReportUpdateWithWhereUniqueWithoutUserInput.schema';
 import { HealthReportUpdateManyWithWhereWithoutUserInputSchemaObject } from './HealthReportUpdateManyWithWhereWithoutUserInput.schema';
@@ -18,6 +19,7 @@ Joi.array().items(Joi.object().keys(HealthReportUncheckedCreateWithoutUserInputS
 Joi.array().items(Joi.object().keys(HealthReportCreateOrConnectWithoutUserInputSchemaObject))),
   upsert: Joi.alternatives().try(Joi.object().keys(HealthReportUpsertWithWhereUniqueWithoutUserInputSchemaObject),
 Joi.array().items(Joi.object().keys(HealthReportUpsertWithWhereUniqueWithoutUserInputSchemaObject))),
+  createMany: Joi.object().keys(HealthReportCreateManyUserInputEnvelopeSchemaObject),
   set: Joi.alternatives().try(Joi.object().keys(HealthReportWhereUniqueInputSchemaObject),
 Joi.array().items(Joi.object().keys(HealthReportWhereUniqueInputSchemaObject))),
   disconnect: Joi.alternatives().try(Joi.object().keys(HealthReportWhereUniqueInputSchemaObject),

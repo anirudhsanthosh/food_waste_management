@@ -4,6 +4,7 @@ import { RequestCreateWithoutBloodInputSchemaObject } from './RequestCreateWitho
 import { RequestUncheckedCreateWithoutBloodInputSchemaObject } from './RequestUncheckedCreateWithoutBloodInput.schema';
 import { RequestCreateOrConnectWithoutBloodInputSchemaObject } from './RequestCreateOrConnectWithoutBloodInput.schema';
 import { RequestUpsertWithWhereUniqueWithoutBloodInputSchemaObject } from './RequestUpsertWithWhereUniqueWithoutBloodInput.schema';
+import { RequestCreateManyBloodInputEnvelopeSchemaObject } from './RequestCreateManyBloodInputEnvelope.schema';
 import { RequestWhereUniqueInputSchemaObject } from './RequestWhereUniqueInput.schema';
 import { RequestUpdateWithWhereUniqueWithoutBloodInputSchemaObject } from './RequestUpdateWithWhereUniqueWithoutBloodInput.schema';
 import { RequestUpdateManyWithWhereWithoutBloodInputSchemaObject } from './RequestUpdateManyWithWhereWithoutBloodInput.schema';
@@ -18,6 +19,7 @@ Joi.array().items(Joi.object().keys(RequestUncheckedCreateWithoutBloodInputSchem
 Joi.array().items(Joi.object().keys(RequestCreateOrConnectWithoutBloodInputSchemaObject))),
   upsert: Joi.alternatives().try(Joi.object().keys(RequestUpsertWithWhereUniqueWithoutBloodInputSchemaObject),
 Joi.array().items(Joi.object().keys(RequestUpsertWithWhereUniqueWithoutBloodInputSchemaObject))),
+  createMany: Joi.object().keys(RequestCreateManyBloodInputEnvelopeSchemaObject),
   set: Joi.alternatives().try(Joi.object().keys(RequestWhereUniqueInputSchemaObject),
 Joi.array().items(Joi.object().keys(RequestWhereUniqueInputSchemaObject))),
   disconnect: Joi.alternatives().try(Joi.object().keys(RequestWhereUniqueInputSchemaObject),

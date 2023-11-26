@@ -3,6 +3,7 @@ import Joi from 'joi';
 import { RequestCreateWithoutBloodInputSchemaObject } from './RequestCreateWithoutBloodInput.schema';
 import { RequestUncheckedCreateWithoutBloodInputSchemaObject } from './RequestUncheckedCreateWithoutBloodInput.schema';
 import { RequestCreateOrConnectWithoutBloodInputSchemaObject } from './RequestCreateOrConnectWithoutBloodInput.schema';
+import { RequestCreateManyBloodInputEnvelopeSchemaObject } from './RequestCreateManyBloodInputEnvelope.schema';
 import { RequestWhereUniqueInputSchemaObject } from './RequestWhereUniqueInput.schema'
 
 export const RequestCreateNestedManyWithoutBloodInputSchemaObject = {
@@ -12,6 +13,7 @@ Joi.object().keys(RequestUncheckedCreateWithoutBloodInputSchemaObject),
 Joi.array().items(Joi.object().keys(RequestUncheckedCreateWithoutBloodInputSchemaObject))),
   connectOrCreate: Joi.alternatives().try(Joi.object().keys(RequestCreateOrConnectWithoutBloodInputSchemaObject),
 Joi.array().items(Joi.object().keys(RequestCreateOrConnectWithoutBloodInputSchemaObject))),
+  createMany: Joi.object().keys(RequestCreateManyBloodInputEnvelopeSchemaObject),
   connect: Joi.alternatives().try(Joi.object().keys(RequestWhereUniqueInputSchemaObject),
 Joi.array().items(Joi.object().keys(RequestWhereUniqueInputSchemaObject)))
 }

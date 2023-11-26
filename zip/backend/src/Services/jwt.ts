@@ -14,11 +14,11 @@ export class Jwt {
 
     static decode(token: string): JWT.generate | null | string {
         try {
-            const payload =   jwt.verify(token, this.secret)
+            const payload = jwt.verify(token, this.secret)
 
-            if(!payload) return null;
+            if (!payload) return null;
 
-            console.log(payload);
+            // console.log(payload);
             //@ts-ignore
             return payload
 

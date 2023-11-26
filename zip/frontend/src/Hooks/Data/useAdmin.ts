@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { AdminClient } from "../../Api/admin";
+import { AdminClient } from "../../Api/admin/admin";
 import { PickupClient } from "../../Api/pickups";
 
 export function useAdmin() {

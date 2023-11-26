@@ -1,162 +1,114 @@
-import moment from "moment";
-import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useSearchParams } from "react-router-dom";
-import { Card } from "../Components/common/Card/card";
-import { CardActions } from "../Components/common/Card/cardActions";
-import { SpinnerWithText } from "../Components/common/Loader/SpinnerWithText";
-import { usePickup } from "../Hooks/Data/usePickups";
+import { BiBuildingHouse } from "react-icons/bi";
+import { BsBalloonHeart, BsClipboardData, BsFillGearFill } from "react-icons/bs";
+import { PiHandHeartBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
+import { useBloodGroups } from "../Hooks/Data/useBloodGroup";
+import { useDashBoard } from "../Hooks/Data/useDashboard";
+import { useUserData } from "../Hooks/Data/useUserData";
+import { cn } from "../utils";
 
 export const Dashboard: React.FC = () => {
-    const { pickups, isError, isLoading, error, deleteMutation } = usePickup();
+    const { user } = useUserData();
 
-    const { isLoading: isDeleting, mutateAsync } = deleteMutation;
+    const { dashboard } = useDashBoard();
 
-    const [filters, setFilter] = useState(new Set<string>());
+    const { bloodGroups } = useBloodGroups();
 
-    let [searchParams, setSearchParams] = useSearchParams();
-
-    const activeFilter = searchParams.get("status") ?? "";
-
-    const sort = searchParams.get("sort") ?? "desc";
-
-    console.log({ pickups });
-
-    const filteredItems =
-        pickups?.filter((pickup) => {
-            if (!activeFilter) return true;
-            return activeFilter.toLowerCase() === pickup.status.toLowerCase();
-        }) ?? [];
-
-    const sortedItems = filteredItems?.sort((item1, item2) => {
-        if (sort === "asc") return new Date(item1.createdAt) < new Date(item2.createdAt) ? -1 : 1;
-        return new Date(item1.createdAt) < new Date(item2.createdAt) ? 1 : -1;
-    });
-
-    useEffect(() => {
-        if (!pickups) return;
-
-        const filters = new Set<string>();
-
-        pickups?.forEach((pickup) => filters.add(pickup.status));
-
-        setFilter(filters);
-    }, [pickups]);
-
-    const applyFilter = (key: string, value: string) => {
-        searchParams.set(key, value);
-
-        setSearchParams(searchParams);
-    };
-
-    const handleCancel = async (pickupId: number) => {
-        try {
-            await mutateAsync(pickupId);
-
-            toast.success('Pickup cancelled!')
-        } catch (err) {
-            toast.error("Failed to cancel Pickup please try again later");
-
-            console.log(err);
-        }
-    };
-
-    if (isError) toast.error("Sorry, there was an error failed to load data please try again later.");
+    const headings: { label: string; value: keyof API.BloodGroup }[] = [
+        { label: "Name", value: "name" },
+        { label: "Group", value: "group" },
+        { label: "Variation", value: "variation" },
+        { label: "Availability", value: "stock" },
+        { label: "Comments", value: "comments" },
+    ];
+    // ---
 
     return (
-        <div className="flex flex-col min-w-full min-h-full pb-10">
-            {pickups && (
-                <div className="w-full flex px-3">
-                    <div className="dropdown dropdown-hover">
-                        <label tabIndex={0} className="btn m-1 btn-outline btn-primary">
-                            Sort
-                        </label>
-                        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li>
-                                <a onClick={() => applyFilter("sort", "asc")}>Old - New</a>
-                            </li>
-                            <li>
-                                <a onClick={() => applyFilter("sort", "desc")}>New - Old</a>
-                            </li>
-                        </ul>
-                    </div>
-                    {filters.size > 0 && (
-                        <div className="dropdown dropdown-hover">
-                            <label tabIndex={0} className="btn m-1 btn-outline btn-primary">
-                                {activeFilter ? activeFilter : "All"}
-                            </label>
-                            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                {[null, ...filters].map((filter) => (
-                                    <li>
-                                        {" "}
-                                        <a className="capitalize" onClick={() => applyFilter("status", filter ?? "")}>
-                                            {filter ?? "All"}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+        <div className="w-full px-4">
+            <div className="flex w-full justify-between">
+                <h1>
+                    Hi {user?.name}, <span className="wave">👋</span>
+                </h1>
+                <Link to="profile" className="btn btn-square  ">
+                    <BsFillGearFill />{" "}
+                </Link>
+            </div>
+            <div className="pt-4 flex w-full ">
+                <div className="stats shadow">
+                    <div className="stat">
+                        <div className="stat-figure text-secondary">
+                            <BsBalloonHeart className="text-3xl" />
                         </div>
-                    )}
+                        <div className="stat-title">Donations</div>
+                        <div className="stat-value">{dashboard.data?._count?.donations}</div>
+                        <div className="stat-desc"></div>
+                    </div>
+
+                    <div className="stat">
+                        <div className="stat-figure text-secondary">
+                            <PiHandHeartBold className="text-3xl" />
+                        </div>
+                        <div className="stat-title">Requests</div>
+                        <div className="stat-value">{dashboard.data?._count.requests}</div>
+                        <div className="stat-desc"></div>
+                    </div>
+
+                    <div className="stat">
+                        <div className="stat-figure text-secondary">
+                            <BiBuildingHouse className="text-3xl" />
+                        </div>
+                        <div className="stat-title">Address</div>
+                        <div className="stat-value">{dashboard.data?._count?.address}</div>
+                        <div className="stat-desc"></div>
+                    </div>
+
+                    <div className="stat">
+                        <div className="stat-figure text-secondary">
+                            <BsClipboardData className="text-3xl" />
+                        </div>
+                        <div className="stat-title">Health Reports</div>
+                        <div className="stat-value">{dashboard.data?._count?.healthReports}</div>
+                        <div className="stat-desc"></div>
+                    </div>
                 </div>
-            )}
+            </div>
 
-            <div className="w-full h-full flex flex-wrap justify-evenly gap-3 items-start">
-                {isError && <div>error : {JSON.stringify((error as any)?.response?.data)}</div>}
-
-                {isLoading && <SpinnerWithText />}
-
-                {sortedItems.length ===0 && <div>No Pickup found</div>}
-
-                {sortedItems?.map((pickup) => {
-
-                    return (
-                        <Card>
-                            <div className="flex justify-between">
-                                <label>Status</label>
-                                <strong className="capitalize">{pickup.status}</strong>
-                            </div>
-                            <div className="flex justify-between">
-                                <label>Quantity</label>
-                                <strong>{pickup.quantity}</strong>
-                            </div>
-                            <div className="flex justify-between">
-                                <label>Phone</label>
-                                <strong>{pickup.phone}</strong>
-                            </div>
-                            <div className="flex justify-between">
-                                <label>Date</label>
-                                <strong>{pickup.date}</strong>
-                            </div>
-                            <div className="flex justify-between">
-                                <label>Place</label>
-                                <strong>{pickup.place}</strong>
-                            </div>
-                            <div className="flex justify-between">
-                                <label>Requested At</label>
-                                <strong className="first-letter:capitalize">
-                                    {moment(pickup.createdAt).fromNow()}
-                                </strong>
-                            </div>
-
-                            <div tabIndex={0} className="collapse collapse-arrow">
-                                <div className="collapse-title p-0 cursor-pointer">Address</div>
-                                <div className="collapse-content">
-                                    {pickup.address.split("\n").map((line) => (
-                                        <p>{line}</p>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {pickup.status === "pending" && (
-                                <CardActions>
-                                    <button className="btn btn-error" onClick={()=>handleCancel(pickup.id)}>
-                                        Cancel
-                                    </button>
-                                </CardActions>
-                            )}
-                        </Card>
-                    );
-                })}
+            <div className="w-full pt-10">
+                <h2 className="py-4">Availability</h2>
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            {headings.map((heading) => (
+                                <th scope="col" className="px-6 py-3" key={heading.value}>
+                                    {heading.label}
+                                </th>
+                            ))}
+                        </thead>
+                        <tbody>
+                            {bloodGroups.data?.map((group) => {
+                                return (
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        {headings.map((heading, index) => {
+                                            return (
+                                                <td
+                                                    key={index}
+                                                    scope="row"
+                                                    className={cn(
+                                                        "px-6 py-4",
+                                                        index === 0 &&
+                                                            "font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                                    )}
+                                                >
+                                                    {group?.[heading.value as keyof typeof group] ?? "NIL"}
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
