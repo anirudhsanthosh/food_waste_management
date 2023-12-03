@@ -13,7 +13,7 @@ export const SideNav: React.FC = () => {
     const { user } = useUserData();
     return (
         <div className="w-fit border-r border-gray-100 h-full">
-            <ul className="menu h-full flex flex-col gap-1  pb-4 whitespace-nowrap text-base bg-primary/5">
+            <ul className="menu h-full flex flex-col gap-1 text-sm  pb-4 whitespace-nowrap 2xl:text-base bg-primary/5">
                 <li>
                     <NavLink to="/" className={({ isActive }) => cn(isActive && "bg-primary text-white")}>
                         <AiOutlineHome className="text-xl" />
